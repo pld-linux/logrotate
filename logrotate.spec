@@ -17,6 +17,10 @@ Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	7a95d7464faea703fa10d6db7a468ddb
 Source1:	%{name}.conf
 Patch0:		%{name}-man.patch
+# Patches from ftp://ftp.suse.com/pub/people/ro/logrotate
+Patch1:		%{name}-moveout.dif
+Patch2:		%{name}-dateext.dif
+Patch3:		%{name}-maxage.dif
 BuildRequires:	popt-devel >= 1.3
 Requires:	/bin/mail
 Requires:	crondaemon
@@ -92,6 +96,9 @@ Logrotate призначений для полегшення адм╕н╕стрування системи, яка
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p0
+%patch2 -p0
+%patch3 -p0
 
 %build
 %{__make} \
