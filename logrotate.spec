@@ -5,12 +5,14 @@ Summary(pl):	Rotacje, kompresowanie, i system logowania.
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar.
 Name:		logrotate
 Version:	3.2
-Release:	3
+Release:	4
 Copyright:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
-Source:		ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
-Patch:		logrotate-pld.patch
+URL:		ftp://ftp.redhat.com/pub/redhat/code/logrotate
+Source:		%{name}-%{version}.tar.gz
+Patch0:		logrotate-pld.patch
+Patch1:		logrotate-fhs.patch
 BuildPrereq:	popt-devel >= 1.3
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -47,8 +49,9 @@ yollanmasýný saðlar. Her dosya günlük, haftalýk, aylýk olarak ya da çok
 büyük boyutlara ulaþtýðýnda iþlenebilir.
 
 %prep
-%setup -q
-%patch -p1
+%setup  -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
@@ -77,17 +80,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_sbindir}/logrotate
 %attr(750,root,root) /etc/cron.daily/logrotate
-%attr(640,root,root) %config(noreplace) %veryfi(not size mtime md5) /etc/*.conf
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/*.conf
 %attr(750,root,root) %dir /etc/logrotate.d
 
 %{_mandir}/man8/*
 
 %changelog
 * Thu May 20 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+  [3.2-4]
 - added new config file (commpres postrotate && chmod 640 ),
 - removed rotate of /var/log/{wtmp,lastlog}
   lastlog provides SysVinit, wtmp(x) provides syslogd
-- fixes for build.
+- fixes for build,
+- FHS 2.0.
 
 * Wed Apr 21 1999 Piotr Czerwiñski <pius@pld.org.pl>
   [3.2-1]
