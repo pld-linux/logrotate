@@ -35,7 +35,7 @@
  Tells \fBlogrotate\fR to use an alternate state file.  This is useful
  if logrotate is being run as a different user for various sets of
 -log files.  The default state file is \fI/var/lib/logrotate/status\fR.
-+log files.  The default state file is \fI/var/lib/misc/logrotate/status\fR.
++log files.  The default state file is \fI/var/lib/misc/logrotate.status\fR.
  
  .TP
  \fB-\-usage\fR
