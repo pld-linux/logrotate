@@ -2,7 +2,7 @@ Summary:	Rotates, compresses, removes and mails system log files
 Summary(de):	Rotiert, komprimiert und verschickt Systemlogs
 Summary(es):	Hace el rutado, comprime y envía mail de logs del sistema
 Summary(fr):	Fait tourner, compresse, et envoie par mail les connexions au système
-Summary(pl):	Rotacje, kompresowanie, i system logowania
+Summary(pl):	System rotacji i kompresowania logów
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Name:		logrotate
 Version:	3.5.4
@@ -61,7 +61,7 @@ mektup olarak yollanmasýný saðlar. Her dosya günlük, haftalýk, aylýk
 olarak ya da çok büyük boyutlara ulaþtýðýnda iþlenebilir.
 
 %prep
-%setup  -q
+%setup -q
 
 %build
 %{__make} RPM_OPT_FLAGS="%{rpmcflags}"
