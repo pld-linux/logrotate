@@ -6,7 +6,7 @@ Summary(pl):	System rotacji i kompresowania logów
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Name:		logrotate
 Version:	3.5.5
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -68,7 +68,7 @@ olarak ya da çok büyük boyutlara ulaþtýðýnda iþlenebilir.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/{cron.daily,logrotate.d},var/log/archiv} \
+install -d $RPM_BUILD_ROOT/{etc/{cron.daily,logrotate.d},var/{lib,log/archiv}} \
 	$RPM_BUILD_ROOT%{_mandir}
 
 %{__make} install \
@@ -77,6 +77,7 @@ install -d $RPM_BUILD_ROOT/{etc/{cron.daily,logrotate.d},var/log/archiv} \
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
 install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
+touch $RPM_BUILD_ROOT/var/lib/logrotate.status
 
 gzip -9nf CHANGES
 
@@ -88,9 +89,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES.gz
 %attr(755,root,root) %{_sbindir}/logrotate
 %attr(750,root,root) /etc/cron.daily/logrotate
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
 %attr(750,root,root) %dir /etc/logrotate.d
+%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/*.conf
+%attr(640,root,root) %ghost /var/lib/logrotate.status
+%attr(750,root,root) %dir /var/log/archiv
 
 %{_mandir}/man8/*
-
-%attr(750,root,root) %dir /var/log/archiv
