@@ -1,16 +1,17 @@
 Summary:     Rotates, compresses, and mails system logs
-Summary(de): Rotiert, komprimiert und verschickt Systemlogs
-Summary(fr): Fait tourner, compresse, et envoie par mail les connexions au système.
-Summary(pl): Rotacje, kompresowanie, i system logowania
-Summary(tr): Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Name:        logrotate
 Version:     2.6
 Release:     4
 Copyright:   GPL
 Group:       Utilities/System
+Group(pl):   Narzêdzia/System
 Source:      ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
 Patch:       logrotate-lastlog-patch
-Buildroot:   /tmp/%{name}-%{version}-root
+Buildroot:   /tmp/buildroot-%{name}-%{version}
+Summary(de): Rotiert, komprimiert und verschickt Systemlogs
+Summary(fr): Fait tourner, compresse, et envoie par mail les connexions au système.
+Summary(pl): Rotacje, kompresowanie, i system logowania
+Summary(tr): Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 
 %description
 Logrotate is designed to ease administration of systems that generate
@@ -59,12 +60,14 @@ make PREFIX=$RPM_BUILD_ROOT install
 install examples/logrotate-default $RPM_BUILD_ROOT/etc/logrotate.conf
 install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 
+gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/*
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %attr(755, root, root) /usr/sbin/logrotate
-%attr(644, root,  man)  /usr/man/man8/logrotate.8
+%attr(644, root,  man) /usr/man/man8/*
 %attr(750, root, root) /etc/cron.daily/logrotate
 %attr(640, root, root) %config /etc/logrotate.conf
 %attr(750, root, root) %dir /etc/logrotate.d
