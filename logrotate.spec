@@ -118,7 +118,7 @@ if [ -f /var/lib/logrotate.status ]; then
 else
 	touch %{statdir}/logrotate.status
 	chmod 000 %{statdir}/logrotate.status
-	chown root.root %{statdir}/logrotate.status
+	chown root:root %{statdir}/logrotate.status
 	chmod 640 %{statdir}/logrotate.status
 fi
 
