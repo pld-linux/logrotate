@@ -15,7 +15,7 @@ Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Summary(uk):	òÏÔÕ¤, ËÏÍÐÒÅÓÕ¤, ×ÉÄÁÌÑ¤ ÔÁ ×¦ÄÐÒÁ×ÌÑ¤ ÐÏÛÔÏÀ ÌÏÇ-ÆÁÊÌÉ
 Name:		logrotate
 Version:	3.7
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	%{name}-%{version}.tar.gz
@@ -31,6 +31,7 @@ BuildRequires:	popt-devel >= 1.3
 Requires:	/bin/mail
 Requires:	crondaemon
 Requires(post):	fileutils
+PreReq:		setup >= 2.4.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		statdir		/var/lib/misc
@@ -147,5 +148,5 @@ fi
 %attr(750,root,root) /etc/cron.daily/logrotate
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/*.conf
 %attr(640,root,root) %ghost %{statdir}/logrotate.status
-%attr(750,root,root) %dir /var/log/archiv
+%attr(750,root,logs) %dir /var/log/archiv
 %{_mandir}/man8/*
