@@ -54,13 +54,13 @@ olarak ya da çok büyük boyutlara ulaþtýðýnda iþlenebilir.
 %setup  -q
 
 %build
-make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
+%{__make} RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/{etc/{cron.daily,logrotate.d},var/log/archiv}
 
-make install \
+%{__make} install \
 	BINDIR=$RPM_BUILD_ROOT%{_sbindir} \
 	MANDIR=$RPM_BUILD_ROOT%{_mandir}
 
