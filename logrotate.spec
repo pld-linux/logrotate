@@ -88,8 +88,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES.gz
 %attr(755,root,root) %{_sbindir}/logrotate
-%attr(750,root,root) /etc/cron.daily/logrotate
 %attr(750,root,root) %dir /etc/logrotate.d
+%attr(750,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/cron.daily/logrotate
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/*.conf
 %attr(640,root,root) %ghost /var/lib/logrotate.status
 %attr(750,root,root) %dir /var/log/archiv
