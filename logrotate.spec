@@ -5,12 +5,12 @@ Summary(pl):	Rotacje, kompresowanie, i system logowania
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Name:		logrotate
 Version:	3.3.2
-Release:	2
+Release:	3
 License:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
-Source1:	logrotate.conf
+Source1:	%{name}.conf
 Requires:	/bin/mail
 BuildRequires:	popt-devel >= 1.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
