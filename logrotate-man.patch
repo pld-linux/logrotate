@@ -1,5 +1,5 @@
 --- logrotate-3.6.5/logrotate.8.orig	Wed Mar 20 16:50:19 2002
-+++ logrotate-3.6.5/logrotate.8	Mon Jul  1 18:58:27 2002
++++ logrotate-3.6.5/logrotate.8	Thu Oct 17 16:33:02 2002
 @@ -20,7 +20,7 @@
  in which the \fBlogrotate\fR config files are listed in is important.
  Normally, a single config file which includes any other config files
@@ -26,7 +26,7 @@
  Tells \fBlogrotate\fR which command to use when mailing logs. This
  command should accept two arguments: 1) the subject of the message, and
  2) the recipient. The command must then read a message on standard input
-@@ -51,7 +51,7 @@
+@@ -51,10 +51,10 @@
  -s\fR.
  
  .TP
@@ -34,7 +34,11 @@
 +\fB-s\fR,\fB -\-state <statefile>\fR
  Tells \fBlogrotate\fR to use an alternate state file.  This is useful
  if logrotate is being run as a different user for various sets of
- log files.  The default state file is \fI/var/lib/logrotate/status\fR.
+-log files.  The default state file is \fI/var/lib/logrotate/status\fR.
++log files.  The default state file is \fI/var/lib/misc/logrotate/status\fR.
+ 
+ .TP
+ \fB-\-usage\fR
 @@ -311,13 +311,13 @@
  
  .TP
@@ -62,7 +66,7 @@
  
  .TP
  \fBsharedscripts\fR
-@@ -369,7 +369,7 @@
+@@ -369,13 +369,13 @@
  Log files are rotated if the current weekday is less then the weekday
  of the last rotation or if more then a week has passed since the last
  rotation. This is normally the same as rotating logs on the first day
@@ -70,17 +74,6 @@
 +of the week, but it works better if \fBlogrotate\fR is not run every
  night.
  
- .SH FILES
-@@ -54,7 +54,7 @@
- \fB-s\fR,\fB -\-state <statefile>\fR
- Tells \fBlogrotate\fR to use an alternate state file.  This is useful
- if logrotate is being run as a different user for various sets of
--log files.  The default state file is \fI/var/lib/logrotate/status\fR.
-+log files.  The default state file is \fI/var/lib/misc/logrotate.status\fR.
- 
- .TP
- \fB-\-usage\fR
-@@ -375,7 +375,7 @@
  .SH FILES
  .PD 0
  .TP 27
