@@ -16,9 +16,9 @@ Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.g
 # Source0-md5: 680eb24979621e10362a703780942794
 Source1:	%{name}.conf
 Patch0:		%{name}-man.patch
+BuildRequires:	popt-devel >= 1.3
 Requires:	/bin/mail
 Requires(post):	fileutils
-BuildRequires:	popt-devel >= 1.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		statdir		/var/lib/misc
@@ -131,5 +131,4 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/*.conf
 %attr(640,root,root) %ghost %{statdir}/logrotate.status
 %attr(750,root,root) %dir /var/log/archiv
-
 %{_mandir}/man8/*
