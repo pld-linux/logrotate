@@ -129,7 +129,7 @@ fi
 %doc CHANGES
 %attr(755,root,root) %{_sbindir}/logrotate
 %attr(750,root,root) %dir /etc/logrotate.d
-%attr(750,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/cron.daily/logrotate
+%attr(750,root,root) /etc/cron.daily/logrotate
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/*.conf
 %attr(640,root,root) %ghost %{statdir}/logrotate.status
 %attr(750,root,root) %dir /var/log/archiv
