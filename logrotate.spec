@@ -61,7 +61,7 @@ make PREFIX=$RPM_BUILD_ROOT install
 install examples/logrotate-default $RPM_BUILD_ROOT/etc/logrotate.conf
 install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 
-gzip -9nf $RPM_BUILD_ROOT/usr/man/man8/* \
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man8/* \
 	CHANGES
 
 %clean
@@ -76,7 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(640,root,root) %config /etc/logrotate.conf
 %attr(750,root,root) %dir /etc/logrotate.d
 
-/usr/man/man8/*
+%{_mandir}/man8/*
 
 %changelog
 * Wed Apr 21 1999 Piotr Czerwiñski <pius@pld.org.pl>
