@@ -5,7 +5,7 @@ Summary(pl):	Rotacje, kompresowanie, i system logowania.
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar.
 Name:		logrotate
 Version:	3.2
-Release:	1
+Release:	2
 Copyright:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
