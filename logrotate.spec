@@ -84,29 +84,3 @@ rm -rf $RPM_BUILD_ROOT
 %attr(750,root,root) %dir /etc/logrotate.d
 
 %{_mandir}/man8/*
-
-%changelog
-* Thu May 20 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [3.2-4]
-- added new config file (commpres postrotate && chmod 640 ),
-- removed rotate of /var/log/{wtmp,lastlog}
-  lastlog provides SysVinit, wtmp(x) provides syslogd
-- fixes for build,
-- FHS 2.0.
-
-* Wed Apr 21 1999 Piotr Czerwiñski <pius@pld.org.pl>
-  [3.2-1]
-- updated to 3.2,
-- changed Buildroot to /tmp/%%{name}-%%{version}-root,
-- added full %defattr description in files,
-- added %doc,
-- removed man group from man pages,
-- added passing $RPM_OPT_FLAGS during compile,
-- cosmetic changes for common l&f,
-- added "BuildPrereq: popt >= 1.3",
-- recompiled on rpm 3.
-
-* Tue Oct 06 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [2.6-4]
-- added pl translation,
-- minor modifications of the spec file.
