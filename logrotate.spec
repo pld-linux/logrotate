@@ -1,10 +1,11 @@
 Summary:	Rotates, compresses, removes and mails system log files
 Summary(de):	Rotiert, komprimiert und verschickt Systemlogs
+Summary(es):	Hace el rutado, comprime y envía mail de logs del sistema
 Summary(fr):	Fait tourner, compresse, et envoie par mail les connexions au système
 Summary(pl):	Rotacje, kompresowanie, i system logowania
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Name:		logrotate
-Version:	3.3.2
+Version:	3.4
 Release:	3
 License:	GPL
 Group:		Utilities/System
@@ -29,6 +30,13 @@ Log-Dateien erzeugen, indem es das automatische Rotieren,
 Komprimieren, Entfernen, und Senden von Log-Dateien ermöglicht. Jede
 Log-Datei kann täglich, wöchentlich oder monatlich verarbeitet werden,
 wenn sie zu groß wird.
+
+%description -l es
+Logrotate fue proyectado para facilitar la administración de sistemas
+que generan gran número de archivos de log. Permite automatización
+en la rotación, compresión, remoción y envío de mail de archivos
+de logs. Cada archivo de log puede ser tratado diariamente,
+semanalmente, mensualmente o cuanto crezca demasiado.
 
 %description -l fr
 Logrotate est conçu pour faciliter l'administration de systèmes qui
