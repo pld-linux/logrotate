@@ -19,6 +19,7 @@ Source1:	%{name}.conf
 Patch0:		%{name}-man.patch
 BuildRequires:	popt-devel >= 1.3
 Requires:	/bin/mail
+Requires:	crondaemon
 Requires(post):	fileutils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
