@@ -13,6 +13,7 @@ Release:	4
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
+# Source0-md5: 680eb24979621e10362a703780942794
 Source1:	%{name}.conf
 Patch0:		%{name}-man.patch
 Requires:	/bin/mail
