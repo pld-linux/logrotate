@@ -1,0 +1,102 @@
+--- config.c
++++ config.c
+@@ -608,6 +608,21 @@
+ 		    }
+ 		    *endtag = oldchar, start = endtag;
+ 		}
++	    } else if (!strcmp(start, "maxage")) {
++		*endtag = oldchar, start = endtag;
++
++		if (!isolateValue(configFile, lineNum, "maxage count", &start, 
++				  &endtag)) {
++		    oldchar = *endtag, *endtag = '\0';
++
++		    newlog->rotateAge = strtoul(start, &chptr, 0);
++		    if (*chptr || newlog->rotateAge < 0) {
++			message(MESS_ERROR, "%s:%d bad maximum age '%s'\n",
++				    configFile, lineNum, start);
++			return 1;
++		    }
++		    *endtag = oldchar, start = endtag;
++		}
+ 	    } else if (!strcmp(start, "errors")) {
+ 		message(MESS_DEBUG, "%s: %d: the errors directive is deprecated and no longer used.\n",
+ 			configFile, lineNum);
+--- logrotate.8
++++ logrotate.8
+@@ -251,6 +251,12 @@
+ instead of the just-rotated file (this is the default).
+ 
+ .TP
++\fBmaxage\fR \fIcount\fR
++Remove rotated logs older than <count> days. The age is only checked
++if the logfile is to be rotated. The files are mailed to the
++configured address if \fBmaillast\fR and \fBmail\fR are configured.
++
++.TP
+ \fBmissingok\fR
+ If the log file is missing, go on to the next one without issuing an error
+ message. See also \fBnomissingok\fR.
+--- logrotate.c
++++ logrotate.c
+@@ -589,7 +589,10 @@
+ 	     * the date in their name */
+ 	     for (i = 0; i < globResult.gl_pathc; i++) {
+ 		if( !stat((globResult.gl_pathv)[i],&fst_buf) ) {
+-		    if (i < ((int)globResult.gl_pathc - rotateCount - 1)) {
++		    if ((i < ((int)globResult.gl_pathc - rotateCount - 1))
++			|| ((log->rotateAge > 0)
++			    && (((nowSecs - fst_buf.st_mtime)/60/60/24)
++				> log->rotateAge))) {
+ 			if ( mail_out != -1 ) {
+ 			    if (!hasErrors && log->logAddress)
+ 				hasErrors = mail_old_log(log, logNum, NULL,
+@@ -623,6 +626,25 @@
+ 	globfree(&globResult);
+ 	free(glob_pattern);
+     } else {
++	if ( log->rotateAge ) {
++	    struct stat fst_buf;
++	    for (i=1; i <= rotateCount; i++) {
++		sprintf(oldName, "%s/%s.%d%s%s", dirName, baseName,
++			rotateCount + 1, fileext, compext);
++		if(!stat(oldName,&fst_buf)
++		    && (((nowSecs - fst_buf.st_mtime)/60/60/24)
++			> log->rotateAge)) {
++		    if (!hasErrors && log->logAddress)
++			hasErrors = mail_old_log(log, logNum, NULL,
++					(globResult.gl_pathv)[i],
++					errorFile, compext);
++		    if (!hasErrors)
++			hasErrors = remove_old_log(log,
++					(globResult.gl_pathv)[i],
++					errorFile);
++		}
++	    }
++	}
+ 
+     sprintf(oldName, "%s/%s.%d%s%s", dirName, baseName,
+             logStart + rotateCount, fileext, compext);
+@@ -1110,8 +1132,10 @@
+ }
+ 
+ int main(int argc, const char ** argv) {
+-    logInfo defConfig = { NULL, NULL, 0, NULL, ROT_SIZE, 
+-			  /* threshHold */ 1024 * 1024, 0,
++    logInfo defConfig = { NULL, NULL, 0, NULL, ROT_SIZE,
++			  /* threshHold */ 1024 * 1024,
++			  /* rotateCount */ 0,
++			  /* rotateAge */ 0,
+ 			  /* log start */ -1,
+ 			  /* pre, post */ NULL, NULL,
+ 			  /* first, last */ NULL, NULL,
+--- logrotate.h
++++ logrotate.h
+@@ -28,6 +28,7 @@
+     enum { ROT_DAYS, ROT_WEEKLY, ROT_MONTHLY, ROT_SIZE, ROT_FORCE } criterium;
+     unsigned int threshhold;
+     int rotateCount;
++    int rotateAge;
+     int logStart;
+     char * pre, * post, * first, * last;
+     char * logAddress;
