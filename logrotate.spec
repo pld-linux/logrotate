@@ -13,7 +13,7 @@ URL:		ftp://ftp.redhat.com/pub/redhat/code/logrotate
 Source:		%{name}-%{version}.tar.gz
 Patch0:		logrotate-pld.patch
 Patch1:		logrotate-fhs.patch
-BuildPrereq:	popt-devel >= 1.3
+BuildRequires:	popt-devel >= 1.3
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
