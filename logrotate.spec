@@ -11,7 +11,7 @@ Group:		Utilities/System
 Group(pl):	Narzêdzia/System
 Source:		ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
 Patch:		logrotate-lastlog.patch
-BuildPrereq:	popt >= 1.3
+BuildPrereq:	popt-devel >= 1.3
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
