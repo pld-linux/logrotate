@@ -9,7 +9,7 @@ Summary(tr):	Sistem gЭnlЭklerini yЖnlendirir, sЩkЩЧtЩrЩr ve mektup olarak yollar
 Summary(uk):	Роту╓, компресу╓, видаля╓ та в╕дправля╓ поштою лог-файли
 Name:		logrotate
 Version:	3.6.5
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
