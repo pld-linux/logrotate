@@ -1,0 +1,82 @@
+--- logrotate.8.orig	Mon Jul  1 12:11:40 2002
++++ logrotate.8	Mon Jul  1 12:16:08 2002
+@@ -20,7 +20,7 @@
+ in which the \fBlogrotate\fR config files are listed in is important.
+ Normally, a single config file which includes any other config files
+ which are needed should be used.  See below for more information on how
+-to use the \fIinclude\fR directive to accomplish this.  If a directory
++to use the \fBinclude\fR directive to accomplish this.  If a directory
+ is given on the command line, every file in that directory is used as
+ a config file.
+ .P
+@@ -36,14 +36,14 @@
+ be made to the logs or to the \fBlogrotate\fR state file.
+ 
+ .TP
+-\fB-f, -\-force\fR
++\fB-f\fR,\fB -\-force\fR
+ Tells \fBlogrotate\fR to force the rotation, even if it doesn't think
+ this is necessary.  Sometimes this is useful after adding new entries to
+ \fBlogrotate\fR, or if old log files have been removed by hand, as the
+ new files will be created, and logging will continue correctly.
+ 
+ .TP
+-\fB-m, -\-mail <command>\fR
++\fB-m\fR,\fB -\-mail <command>\fR
+ Tells \fBlogrotate\fR which command to use when mailing logs. This
+ command should accept two arguments: 1) the subject of the message, and
+ 2) the recipient. The command must then read a message on standard input
+@@ -51,7 +51,7 @@
+ -s\fR.
+ 
+ .TP
+-\fB-s, -\-state <statefile>\fR
++\fB-s\fR,\fB -\-state <statefile>\fR
+ Tells \fBlogrotate\fR to use an alternate state file.  This is useful
+ if logrotate is being run as a different user for various sets of
+ log files.  The default state file is \fB/var/lib/logrotate.status\fR.
+@@ -115,7 +115,7 @@
+ \fI/sbin/killall -HUP syslogd\fR will be executed.
+ 
+ The next section defines the parameters for both
+-\fI/var/log/httpd/access.log\fRand \fI/var/log/httpd/error.log\fR.
++\fI/var/log/httpd/access.log\fR and \fI/var/log/httpd/error.log\fR.
+ They are rotated whenever is grows over 100k is size, and the old logs
+ files are mailed (uncompressed) to www@my.org after going through 5
+ rotations, rather then being removed. The \fBsharedscripts\fR means that
+@@ -292,13 +292,13 @@
+ 
+ .TP
+ \fBpostrotate\fR/\fBendscript\fR
+-The lines between \fIpostrotate\fR and \fIendscript\fR (both of which
++The lines between \fBpostrotate\fR and \fBendscript\fR (both of which
+ must appear on lines by themselves) are executed after the log file is
+ rotated. These directives may only appear inside of a log file definition.
+ See \fBprerotate\fR as well.
+ 
+ .TP
+-\fBprerotate\fR/\fBendscript\fR\
++\fBprerotate\fR/\fBendscript\fR
+ The lines between \fBprerotate\fR and \fBendscript\fR (both of which
+ must appear on lines by themselves) are executed before the log file is
+ rotated and only if the log will actually be rotated. These directives
+@@ -315,8 +315,8 @@
+ \fBsize \fIsize\fR
+ Log files are rotated when they grow bigger then \fIsize\fR bytes. If
+ \fIsize\fR is followed by \fIM\fR, the size if assumed to be in megabytes.
+-If the \fIk\fR is used, the size is in kilobytes. So \fBsize 100\fR,
+-\fIsize 100k\fR, and \fIsize 100M\fR are all valid.
++If the \fIk\fR is used, the size is in kilobytes. So \fBsize \fI100\fR,
++\fBsize \fI100k\fR, and \fBsize \fI100M\fR are all valid.
+ 
+ .TP
+ \fBsharedscripts\fR
+@@ -342,7 +342,7 @@
+ Log files are rotated if the current weekday is less then the weekday
+ of the last rotation or if more then a week has passed since the last
+ rotation. This is normally the same as rotating logs on the first day
+-of the week, but it works better if \fIlogrotate\fR is not run every
++of the week, but it works better if \fBlogrotate\fR is not run every
+ night.
+ 
+ .SH FILES
