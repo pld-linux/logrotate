@@ -3,10 +3,13 @@ Summary(de):	Rotiert, komprimiert und verschickt Systemlogs
 Summary(es):	Hace el rutado, comprime y envía mail de logs del sistema
 Summary(fr):	Fait tourner, compresse, et envoie par mail les connexions au système
 Summary(pl):	System rotacji i kompresowania logów
+Summary(pt_BR): Rotaciona, comprime e envia mail de logs do sistema
+Summary(ru): òÏÔÉÒÕÅÔ, ËÏÍÐÒÅÓÓÉÒÕÅÔ, ÕÄÁÌÑÅÔ É ÏÔÐÒÁ×ÌÑÅÔ ÐÏ ÐÏÞÔÅ ÌÏÇ-ÆÁÊÌÙ
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
+Summary(uk): òÏÔÕ¤, ËÏÍÐÒÅÓÕ¤, ×ÉÄÁÌÑ¤ ÔÁ ×¦ÄÐÒÁ×ÌÑ¤ ÐÏÛÔÏÀ ÌÏÇ-ÆÁÊÌÉ
 Name:		logrotate
-Version:	3.6
-Release:	6
+Version:	3.6.5
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
@@ -55,6 +58,20 @@ Program ten pozwala na automatyczn± kompresjê logów. Mo¿e kontrolowaæ
 logi raz dziennie, raz na miesi±c, raz na tydzieñ lub wtedy kiedy
 pliki z logami systemowymi s± ju¿ du¿e.
 
+%description -l pt_BR
+Logrotate foi projetado para facilitar a administração de sistemas
+que geram grande número de arquivos de log. Permite automatização
+na rotação, compressão, remoção e envio de mail de arquivos de
+logs. Cada arquivo de log pode ser tratado diariamente, semanalmente,
+mensalmente ou quanto crescer demais.
+
+%description -l ru
+Logrotate ÐÒÅÄÎÁÚÎÁÞÅÎ ÄÌÑ ÏÂÌÅÇÞÅÎÉÑ ÁÄÍÉÎÉÓÔÒÉÒÏ×ÁÎÉÑ ÓÉÓÔÅÍÙ, ËÏÔÏÒÁÑ
+ÇÅÎÅÒÉÒÕÅÔ ÂÏÌØÛÏÅ ËÏÌÉÞÅÓÔ×Ï ÆÁÊÌÏ× Ó ÌÏÇÁÍÉ. ïÎ ÐÏÚ×ÏÌÑÅÔ Á×ÔÏÍÁÔÉÞÅÓËÉ
+ÒÏÔÉÒÏ×ÁÔØ, ËÏÍÐÒÅÓÓÉÒÏ×ÁÔØ, ÕÄÁÌÑÔØ É ÐÏÓÙÌÁÔØ ÆÁÊÌÙ Ó ÌÏÇÁÍÉ ÐÏ e-mail.
+ëÁÖÄÙÊ ÌÏÇ ÍÏÖÅÔ ÏÂÒÁÂÁÔÙ×ÁÔØÓÑ ÅÖÅÄÎÅ×ÎÏ, ÅÖÅÎÅÄÅÌØÎÏ, ÅÖÅÍÅÓÑÞÎÏ ÉÌÉ ÐÏ
+ÄÏÓÔÉÖÅÎÉÉ ÏÐÒÅÄÅÌÅÎÎÏÇÏ ÒÁÚÍÅÒÁ.
+
 %description -l tr
 logrotate çok fazla sayýda günlük dosyasý üreten sistemlerin
 yönetimini kolaylaþtýrmak için tasarlanmýþtýr. Kayýt dosyalarýnýn
@@ -62,9 +79,16 @@ otomatik olarak yönlendirilmesini, sýkýþtýrýlmasýný, silinmesiný ve
 mektup olarak yollanmasýný saðlar. Her dosya günlük, haftalýk, aylýk
 olarak ya da çok büyük boyutlara ulaþtýðýnda iþlenebilir.
 
+%description -l uk
+Logrotate ÐÒÉÚÎÁÞÅÎÉÊ ÄÌÑ ÐÏÌÅÇÛÅÎÎÑ ÁÄÍ¦Î¦ÓÔÒÕ×ÁÎÎÑ ÓÉÓÔÅÍÉ, ÑËÁ ÇÅÎÅÒÕ¤
+×ÅÌÉËÕ Ë¦ÌØË¦ÓÔØ ÆÁÊÌ¦× Ú ÌÏÇÁÍÉ. ÷¦Î ÄÏÚ×ÏÌÑ¤ Á×ÔÏÍÁÔÉÞÎÏ ÒÏÔÕ×ÁÔÉ,
+ËÏÍÐÒÅÓÕ×ÁÔÉ, ×ÉÄÁÌÑÔÉ ÔÁ ÐÏÓÉÌÁÔÉ ÐÏÛÔÏÀ ÌÏÇ-ÆÁÊÌÉ. ëÏÖÅÎ ÌÏÇ ÍÏÖÅ
+ÏÂÒÏÂÌÑÔÉÓÑ ÝÏÄÅÎÎÏ, ÝÏÔÉÖÎÑ, ÝÏÍ¦ÓÑÃÑ ÁÂÏ ÐÏ ÄÏÓÑÇÎÅÎÎ¦ ×ÉÚÎÁÞÅÎÏÇÏ
+ÒÏÚÍ¦ÒÕ.
+
 %prep
 %setup -q
-%patch -p0
+%patch -p1
 
 %build
 %{__make} \
@@ -84,8 +108,6 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
 install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 > $RPM_BUILD_ROOT%{statdir}/logrotate.status
 
-gzip -9nf CHANGES
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -101,7 +123,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES.gz
+%doc CHANGES
 %attr(755,root,root) %{_sbindir}/logrotate
 %attr(750,root,root) %dir /etc/logrotate.d
 %attr(750,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/cron.daily/logrotate
