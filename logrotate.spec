@@ -9,7 +9,7 @@ Summary(tr):	Sistem gЭnlЭklerini yЖnlendirir, sЩkЩЧtЩrЩr ve mektup olarak yollar
 Summary(uk):	Роту╓, компресу╓, видаля╓ та в╕дправля╓ поштою лог-файли
 Name:		logrotate
 Version:	3.6.10
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 # ftp://ftp.redhat.com/pub/redhat/linux/rawhide/SRPMS/SRPMS/logrotate*.src.rpm
