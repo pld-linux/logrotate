@@ -13,7 +13,7 @@ Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.g
 Source1:	logrotate.conf
 Patch0:		logrotate-fhs.patch
 BuildRequires:	popt-devel >= 1.3
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The logrotate utility is designed to simplify the administration of log
