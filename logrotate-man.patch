@@ -1,5 +1,6 @@
---- logrotate-3.6.5/logrotate.8.orig	Wed Mar 20 16:50:19 2002
-+++ logrotate-3.6.5/logrotate.8	Thu Oct 17 16:33:02 2002
+diff -urN logrotate-3.6.10.org/logrotate.8 logrotate-3.6.10/logrotate.8
+--- logrotate-3.6.10.org/logrotate.8	2003-08-27 13:13:00.000000000 +0200
++++ logrotate-3.6.10/logrotate.8	2003-08-27 13:13:07.000000000 +0200
 @@ -20,7 +20,7 @@
  in which the \fBlogrotate\fR config files are listed in is important.
  Normally, a single config file which includes any other config files
@@ -39,23 +40,7 @@
  
  .TP
  \fB-\-usage\fR
-@@ -311,13 +311,13 @@
- 
- .TP
- \fBpostrotate\fR/\fBendscript\fR
--The lines between \fIpostrotate\fR and \fIendscript\fR (both of which
-+The lines between \fBpostrotate\fR and \fBendscript\fR (both of which
- must appear on lines by themselves) are executed after the log file is
- rotated. These directives may only appear inside of a log file definition.
- See \fBprerotate\fR as well.
- 
- .TP
--\fBprerotate\fR/\fBendscript\fR\
-+\fBprerotate\fR/\fBendscript\fR
- The lines between \fBprerotate\fR and \fBendscript\fR (both of which
- must appear on lines by themselves) are executed before the log file is
- rotated and only if the log will actually be rotated. These directives
-@@ -334,8 +334,8 @@
+@@ -350,8 +350,8 @@
  \fBsize \fIsize\fR
  Log files are rotated when they grow bigger then \fIsize\fR bytes. If
  \fIsize\fR is followed by \fIM\fR, the size if assumed to be in megabytes.
@@ -66,7 +51,7 @@
  
  .TP
  \fBsharedscripts\fR
-@@ -369,13 +369,13 @@
+@@ -385,13 +385,13 @@
  Log files are rotated if the current weekday is less then the weekday
  of the last rotation or if more then a week has passed since the last
  rotation. This is normally the same as rotating logs on the first day
