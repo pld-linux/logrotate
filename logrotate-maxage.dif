@@ -39,7 +39,7 @@
  message. See also \fBnomissingok\fR.
 --- logrotate.c
 +++ logrotate.c
-@@ -589,7 +589,10 @@
+@@ -615,7 +615,10 @@
  	     * the date in their name */
  	     for (i = 0; i < globResult.gl_pathc; i++) {
  		if( !stat((globResult.gl_pathv)[i],&fst_buf) ) {
@@ -49,9 +49,9 @@
 +			    && (((nowSecs - fst_buf.st_mtime)/60/60/24)
 +				> log->rotateAge))) {
  			if ( mail_out != -1 ) {
- 			    if (!hasErrors && log->logAddress)
- 				hasErrors = mail_old_log(log, logNum, NULL,
-@@ -623,6 +626,25 @@
+ 			    if (!hasErrors && log->logAddress) {
+ 				char * mailFilename;
+@@ -675,6 +678,49 @@
  	globfree(&globResult);
  	free(glob_pattern);
      } else {
@@ -63,21 +63,45 @@
 +		if(!stat(oldName,&fst_buf)
 +		    && (((nowSecs - fst_buf.st_mtime)/60/60/24)
 +			> log->rotateAge)) {
-+		    if (!hasErrors && log->logAddress)
-+			hasErrors = mail_old_log(log, logNum, NULL,
-+					(globResult.gl_pathv)[i],
-+					errorFile, compext);
-+		    if (!hasErrors)
-+			hasErrors = remove_old_log(log,
-+					(globResult.gl_pathv)[i],
-+					errorFile);
++		    if (!hasErrors && log->logAddress) {
++			char * mailFilename;
++
++			if(log->flags & LOG_FLAG_MAILFIRST)
++			    mailFilename = NULL;
++			else
++			    mailFilename = (globResult.gl_pathv)[i];
++			/* if the log is compressed (and we're not mailing a
++			   file whose compression has been delayed), we need
++			   to uncompress it */
++			if ((log->flags & LOG_FLAG_COMPRESS) &&
++			    !((log->flags & LOG_FLAG_DELAYCOMPRESS) &&
++			      (log->flags & LOG_FLAG_MAILFIRST))) {
++			    if (mailLog(mailFilename, mailCommand, 
++				    log->uncompress_prog, log->logAddress, 
++				    log->files[logNum])) 
++				hasErrors = 1;
++			    } else {
++				if (mailLog(mailFilename, mailCommand, NULL, 
++				    log->logAddress, mailFilename))
++				hasErrors = 1;
++			    }
++		    }
++		    if (!hasErrors) {
++			message(MESS_DEBUG, "removing old log %s\n", 
++			    (globResult.gl_pathv)[i]);
++			if(!debug && unlink((globResult.gl_pathv)[i])) {
++			    message(MESS_ERROR, "Failed to remove old log %s: %s\n",
++				(globResult.gl_pathv)[i], strerror(errno));
++			    hasErrors = 1;
++			}
++		    }
 +		}
 +	    }
 +	}
  
      sprintf(oldName, "%s/%s.%d%s%s", dirName, baseName,
              logStart + rotateCount, fileext, compext);
-@@ -1110,8 +1132,10 @@
+@@ -1168,8 +1214,10 @@
  }
  
  int main(int argc, const char ** argv) {
