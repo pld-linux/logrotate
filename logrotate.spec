@@ -5,11 +5,12 @@ Summary(fr):	Fait tourner, compresse, et envoie par mail les connexions au systè
 Summary(pl):	Rotacje, kompresowanie, i system logowania
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Name:		logrotate
-Version:	3.4
-Release:	3
+Version:	3.5.2
+Release:	2
 License:	GPL
-Group:		Utilities/System
-Group(pl):	Narzêdzia/System
+Group:		Applications/System
+Group(de):	Applikationen/System
+Group(pl):	Aplikacje/System
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
 Source1:	%{name}.conf
 Requires:	/bin/mail
@@ -33,10 +34,10 @@ wenn sie zu groß wird.
 
 %description -l es
 Logrotate fue proyectado para facilitar la administración de sistemas
-que generan gran número de archivos de log. Permite automatización
-en la rotación, compresión, remoción y envío de mail de archivos
-de logs. Cada archivo de log puede ser tratado diariamente,
-semanalmente, mensualmente o cuanto crezca demasiado.
+que generan gran número de archivos de log. Permite automatización en
+la rotación, compresión, remoción y envío de mail de archivos de logs.
+Cada archivo de log puede ser tratado diariamente, semanalmente,
+mensualmente o cuanto crezca demasiado.
 
 %description -l fr
 Logrotate est conçu pour faciliter l'administration de systèmes qui
@@ -63,23 +64,21 @@ olarak ya da çok büyük boyutlara ulaþtýðýnda iþlenebilir.
 %setup  -q
 
 %build
-%{__make} RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
+%{__make} RPM_OPT_FLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/{cron.daily,logrotate.d},var/log/archiv}
+install -d $RPM_BUILD_ROOT/{etc/{cron.daily,logrotate.d},var/log/archiv} \
+	$RPM_BUILD_ROOT%{_mandir}
 
 %{__make} install \
 	BINDIR=$RPM_BUILD_ROOT%{_sbindir} \
 	MANDIR=$RPM_BUILD_ROOT%{_mandir}
 
-install -d $RPM_BUILD_ROOT%{_mandir}
-
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
 install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man8/* \
-	CHANGES
+gzip -9nf CHANGES
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -87,7 +86,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES.gz
-
 %attr(755,root,root) %{_sbindir}/logrotate
 %attr(750,root,root) /etc/cron.daily/logrotate
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
