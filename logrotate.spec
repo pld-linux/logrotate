@@ -6,7 +6,7 @@ Summary(pl):	System rotacji i kompresowania logów
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Name:		logrotate
 Version:	3.6
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
@@ -15,6 +15,8 @@ Requires:	/bin/mail
 Requires(post):	fileutils
 BuildRequires:	popt-devel >= 1.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		statdir		/var/lib/misc
 
 %description
 The logrotate utility is designed to simplify the administration of
@@ -63,12 +65,14 @@ olarak ya da çok büyük boyutlara ulaþtýðýnda iþlenebilir.
 %setup -q
 
 %build
-%{__make} CC=%{__cc} RPM_OPT_FLAGS="%{rpmcflags}"
+%{__make} \
+	CC=%{__cc} RPM_OPT_FLAGS="%{rpmcflags}" \
+	STATEFILE="%{statdir}/logrotate.status"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/{cron.daily,logrotate.d},var/{lib,log/archiv}} \
-	$RPM_BUILD_ROOT%{_mandir}
+install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d} \
+	$RPM_BUILD_ROOT{%{_mandir},%{statdir},/var/log/archiv}
 
 %{__make} install \
 	BINDIR=$RPM_BUILD_ROOT%{_sbindir} \
@@ -76,7 +80,7 @@ install -d $RPM_BUILD_ROOT/{etc/{cron.daily,logrotate.d},var/{lib,log/archiv}} \
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
 install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
-> $RPM_BUILD_ROOT/var/lib/logrotate.status
+> $RPM_BUILD_ROOT%{statdir}/logrotate.status
 
 gzip -9nf CHANGES
 
@@ -84,10 +88,14 @@ gzip -9nf CHANGES
 rm -rf $RPM_BUILD_ROOT
 
 %post
-touch /var/lib/logrotate.status
-chmod 000 /var/lib/logrotate.status
-chown root.root /var/lib/logrotate.status
-chmod 640 /var/lib/logrotate.status
+if [ -f /var/lib/logrotate.status ]; then
+	mv -f /var/lib/logrotate.status %{statdir}/logrotate.status
+else
+	touch %{statdir}/logrotate.status
+	chmod 000 %{statdir}/logrotate.status
+	chown root.root %{statdir}/logrotate.status
+	chmod 640 %{statdir}/logrotate.status
+fi
 
 %files
 %defattr(644,root,root,755)
@@ -96,7 +104,7 @@ chmod 640 /var/lib/logrotate.status
 %attr(750,root,root) %dir /etc/logrotate.d
 %attr(750,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/cron.daily/logrotate
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/*.conf
-%attr(640,root,root) %ghost /var/lib/logrotate.status
+%attr(640,root,root) %ghost %{statdir}/logrotate.status
 %attr(750,root,root) %dir /var/log/archiv
 
 %{_mandir}/man8/*
