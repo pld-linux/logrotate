@@ -8,12 +8,13 @@ Summary(ru):	Ротирует, компрессирует, удаляет и отправляет по почте лог-файлы
 Summary(tr):	Sistem gЭnlЭklerini yЖnlendirir, sЩkЩЧtЩrЩr ve mektup olarak yollar
 Summary(uk):	Роту╓, компресу╓, видаля╓ та в╕дправля╓ поштою лог-файли
 Name:		logrotate
-Version:	3.6.5
-Release:	5
+Version:	3.6.10
+Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
-# Source0-md5: 680eb24979621e10362a703780942794
+# ftp://ftp.redhat.com/pub/redhat/linux/rawhide/SRPMS/SRPMS/logrotate*.src.rpm
+Source0:	%{name}-%{version}.tar.gz
+# Source0-md5:	7a95d7464faea703fa10d6db7a468ddb
 Source1:	%{name}.conf
 Patch0:		%{name}-man.patch
 BuildRequires:	popt-devel >= 1.3
