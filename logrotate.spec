@@ -1,3 +1,6 @@
+#
+# TODO: restore functionality from dateext and maxage patches
+#
 Summary:	Rotates, compresses, removes and mails system log files
 Summary(de):	Rotiert, komprimiert und verschickt Systemlogs
 Summary(es):	Hace el rutado, comprime y envМa mail de logs del sistema
@@ -9,7 +12,7 @@ Summary(tr):	Sistem gЭnlЭklerini yЖnlendirir, sЩkЩЧtЩrЩr ve mektup olarak yollar
 Summary(uk):	Роту╓, компресу╓, видаля╓ та в╕дправля╓ поштою лог-файли
 Name:		logrotate
 Version:	3.7
-Release:	1
+Release:	1.1
 License:	GPL
 Group:		Applications/System
 Source0:	%{name}-%{version}.tar.gz
@@ -20,9 +23,8 @@ Patch0:		%{name}-man.patch
 Patch1:		%{name}-moveout.dif
 Patch2:		%{name}-dateext.dif
 Patch3:		%{name}-maxage.dif
-BuildRequires:	attr-devel
-BuildRequires:	popt-devel >= 1.3
 BuildRequires:	libselinux-devel
+BuildRequires:	popt-devel >= 1.3
 Requires:	/bin/mail
 Requires:	crondaemon
 Requires(post):	fileutils
@@ -103,8 +105,10 @@ Logrotate призначений для полегшення адм╕н╕стрування системи, яка
 
 %build
 %{__make} \
-	CC=%{__cc} RPM_OPT_FLAGS="%{rpmcflags}" \
+	CC=%{__cc} \
+	RPM_OPT_FLAGS="%{rpmcflags}" \
 	WITH_SELINUX=yes \
+	LOADLIBES="-lpopt -lselinux" \
 	STATEFILE="%{statdir}/logrotate.status"
 
 %install
