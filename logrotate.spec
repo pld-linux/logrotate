@@ -9,8 +9,6 @@ Version:	3.6
 Release:	4
 License:	GPL
 Group:		Applications/System
-Group(de):	Applikationen/System
-Group(pl):	Aplikacje/System
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
 Source1:	%{name}.conf
 Requires:	/bin/mail
