@@ -14,6 +14,7 @@ Group(pl):	Aplikacje/System
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
 Source1:	%{name}.conf
 Requires:	/bin/mail
+Requires(post):	fileutils
 BuildRequires:	popt-devel >= 1.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -77,12 +78,18 @@ install -d $RPM_BUILD_ROOT/{etc/{cron.daily,logrotate.d},var/{lib,log/archiv}} \
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
 install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
-touch $RPM_BUILD_ROOT/var/lib/logrotate.status
+> $RPM_BUILD_ROOT/var/lib/logrotate.status
 
 gzip -9nf CHANGES
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+touch /var/lib/logrotate.status
+chmod 000 /var/lib/logrotate.status
+chown root.root /var/lib/logrotate.status
+chmod 640 /var/lib/logrotate.status
 
 %files
 %defattr(644,root,root,755)
