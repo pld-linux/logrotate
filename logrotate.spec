@@ -1,26 +1,27 @@
-Summary:	Rotates, compresses, and mails system logs.
-Summary(de):	Rotiert, komprimiert und verschickt Systemlogs.
-Summary(fr):	Fait tourner, compresse, et envoie par mail les connexions au système.
-Summary(pl):	Rotacje, kompresowanie, i system logowania.
-Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar.
+Summary:	Rotates, compresses, removes and mails system log files
+Summary(de):	Rotiert, komprimiert und verschickt Systemlogs
+Summary(fr):	Fait tourner, compresse, et envoie par mail les connexions au système
+Summary(pl):	Rotacje, kompresowanie, i system logowania
+Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Name:		logrotate
-Version:	3.2
-Release:	4
+Version:	3.3
+Release:	2
 Copyright:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
-URL:		ftp://ftp.redhat.com/pub/redhat/code/logrotate
-Source:		%{name}-%{version}.tar.gz
-Patch0:		logrotate-pld.patch
-Patch1:		logrotate-fhs.patch
+Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
+Source1:	logrotate.conf
+Patch0:		logrotate-fhs.patch
 BuildRequires:	popt-devel >= 1.3
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
-Logrotate is designed to ease administration of systems that generate
-large numbers of log files. It allows automatic rotation, compression,
-removal, and mailing of log files. Each log file may be handled daily,
-weekly, monthly, or when it grows too large.
+The logrotate utility is designed to simplify the administration of log
+files on a system which generates a lot of log files. Logrotate allows for
+the automatic rotation compression, removal and mailing of log files. 
+Logrotate can be set to handle a log file daily, weekly, monthly or when the
+log file gets to a certain size. Normally, logrotate runs as a daily cron
+job.
 
 %description -l de
 Logrotate vereinfacht die Verwaltung von Systemen, die sehr viele
@@ -51,21 +52,21 @@ büyük boyutlara ulaþtýðýnda iþlenebilir.
 %prep
 %setup  -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d}
+install -d $RPM_BUILD_ROOT/{etc/{cron.daily,logrotate.d},var/log/archiv}
 
-make PREFIX=$RPM_BUILD_ROOT install
+make install \
+	BINDIR=$RPM_BUILD_ROOT%{_sbindir} \
+	MANDIR=$RPM_BUILD_ROOT%{_mandir}
 
 install -d $RPM_BUILD_ROOT%{_mandir}
-mv $RPM_BUILD_ROOT/usr/man/man8 $RPM_BUILD_ROOT%{_mandir}
 
-install examples/logrotate.conf.pld $RPM_BUILD_ROOT/etc/logrotate.conf
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/logrotate.conf
 install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man8/* \
@@ -84,3 +85,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(750,root,root) %dir /etc/logrotate.d
 
 %{_mandir}/man8/*
+
+%attr(750,root,root) %dir /var/log/archiv
