@@ -20,6 +20,7 @@ Patch0:		%{name}-man.patch
 Patch1:		%{name}-moveout.dif
 Patch2:		%{name}-dateext.dif
 Patch3:		%{name}-maxage.dif
+BuildRequires:	attr-devel
 BuildRequires:	popt-devel >= 1.3
 BuildRequires:	libselinux-devel
 Requires:	/bin/mail
