@@ -5,8 +5,8 @@ Summary(fr):	Fait tourner, compresse, et envoie par mail les connexions au systè
 Summary(pl):	Rotacje, kompresowanie, i system logowania
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Name:		logrotate
-Version:	3.5.2
-Release:	3
+Version:	3.5.4
+Release:	2
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
