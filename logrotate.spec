@@ -8,13 +8,12 @@ Summary(ru):	Ротирует, компрессирует, удаляет и отправляет по почте лог-файлы
 Summary(tr):	Sistem gЭnlЭklerini yЖnlendirir, sЩkЩЧtЩrЩr ve mektup olarak yollar
 Summary(uk):	Роту╓, компресу╓, видаля╓ та в╕дправля╓ поштою лог-файли
 Name:		logrotate
-Version:	3.6.10
-Release:	3
+Version:	3.7
+Release:	1
 License:	GPL
 Group:		Applications/System
-# ftp://ftp.redhat.com/pub/redhat/linux/rawhide/SRPMS/SRPMS/logrotate*.src.rpm
 Source0:	%{name}-%{version}.tar.gz
-# Source0-md5:	7a95d7464faea703fa10d6db7a468ddb
+# Source0-md5:	f42373b94c31774694c521c2b9be3d89
 Source1:	%{name}.conf
 Patch0:		%{name}-man.patch
 # Patches from ftp://ftp.suse.com/pub/people/ro/logrotate
@@ -22,6 +21,7 @@ Patch1:		%{name}-moveout.dif
 Patch2:		%{name}-dateext.dif
 Patch3:		%{name}-maxage.dif
 BuildRequires:	popt-devel >= 1.3
+BuildRequires:	libselinux-devel
 Requires:	/bin/mail
 Requires:	crondaemon
 Requires(post):	fileutils
@@ -96,13 +96,14 @@ Logrotate призначений для полегшення адм╕н╕стрування системи, яка
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p0
-%patch2 -p0
-%patch3 -p0
+#%patch1 -p0
+#%patch2 -p0
+#%patch3 -p0
 
 %build
 %{__make} \
 	CC=%{__cc} RPM_OPT_FLAGS="%{rpmcflags}" \
+	WITH_SELINUX=yes \
 	STATEFILE="%{statdir}/logrotate.status"
 
 %install
