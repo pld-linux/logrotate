@@ -1,8 +1,6 @@
 #
-# TODO: test (and eventually fix) dateext and maxage patches
-
+# Conditional build:
 %bcond_without	selinux
-
 #
 Summary:	Rotates, compresses, removes and mails system log files
 Summary(de):	Rotiert, komprimiert und verschickt Systemlogs
