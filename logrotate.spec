@@ -5,8 +5,8 @@ Summary(fr):	Fait tourner, compresse, et envoie par mail les connexions au systè
 Summary(pl):	System rotacji i kompresowania logów
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Name:		logrotate
-Version:	3.5.5
-Release:	4
+Version:	3.6
+Release:	2
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -65,7 +65,7 @@ olarak ya da çok büyük boyutlara ulaþtýðýnda iþlenebilir.
 %setup -q
 
 %build
-%{__make} RPM_OPT_FLAGS="%{rpmcflags}"
+%{__make} CC=%{__cc} RPM_OPT_FLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
