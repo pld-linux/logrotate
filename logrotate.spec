@@ -15,7 +15,7 @@ Summary(tr):	Sistem gЭnlЭklerini yЖnlendirir, sЩkЩЧtЩrЩr ve mektup olarak yollar
 Summary(uk):	Роту╓, компресу╓, видаля╓ та в╕дправля╓ поштою лог-файли
 Name:		logrotate
 Version:	3.7
-Release:	1.3
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	%{name}-%{version}.tar.gz
@@ -25,6 +25,7 @@ Patch0:		%{name}-man.patch
 # patches from ftp://ftp.suse.com/pub/people/ro/logrotate, updated for 3.7
 Patch1:		%{name}-dateext.dif
 Patch2:		%{name}-maxage.dif
+Patch3:		%{name}-noexec-tmp.patch
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	popt-devel >= 1.3
 Requires:	/bin/mail
@@ -103,6 +104,7 @@ Logrotate призначений для полегшення адм╕н╕стрування системи, яка
 %patch0 -p1
 %patch1 -p0
 %patch2 -p0
+%patch3 -p1
 
 %build
 %{__make} \
