@@ -1,5 +1,8 @@
 #
 # TODO: test (and eventually fix) dateext and maxage patches
+
+%bcond_without	selinux
+
 #
 Summary:	Rotates, compresses, removes and mails system log files
 Summary(de):	Rotiert, komprimiert und verschickt Systemlogs
@@ -22,7 +25,7 @@ Patch0:		%{name}-man.patch
 # patches from ftp://ftp.suse.com/pub/people/ro/logrotate, updated for 3.7
 Patch1:		%{name}-dateext.dif
 Patch2:		%{name}-maxage.dif
-BuildRequires:	libselinux-devel
+%{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	popt-devel >= 1.3
 Requires:	/bin/mail
 Requires:	crondaemon
@@ -105,7 +108,7 @@ Logrotate призначений для полегшення адм╕н╕стрування системи, яка
 %{__make} \
 	CC="%{__cc}" \
 	RPM_OPT_FLAGS="%{rpmcflags}" \
-	WITH_SELINUX=yes \
+	WITH_SELINUX=%{?with_selinux:yes}%{!?with_selinux:no} \
 	STATEFILE="%{statdir}/logrotate.status"
 
 %install
