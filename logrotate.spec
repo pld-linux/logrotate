@@ -3,13 +3,13 @@ Summary(de):	Rotiert, komprimiert und verschickt Systemlogs
 Summary(es):	Hace el rutado, comprime y envМa mail de logs del sistema
 Summary(fr):	Fait tourner, compresse, et envoie par mail les connexions au systХme
 Summary(pl):	System rotacji i kompresowania logСw
-Summary(pt_BR): Rotaciona, comprime e envia mail de logs do sistema
-Summary(ru): Ротирует, компрессирует, удаляет и отправляет по почте лог-файлы
+Summary(pt_BR):	Rotaciona, comprime e envia mail de logs do sistema
+Summary(ru):	Ротирует, компрессирует, удаляет и отправляет по почте лог-файлы
 Summary(tr):	Sistem gЭnlЭklerini yЖnlendirir, sЩkЩЧtЩrЩr ve mektup olarak yollar
-Summary(uk): Роту╓, компресу╓, видаля╓ та в╕дправля╓ поштою лог-файли
+Summary(uk):	Роту╓, компресу╓, видаля╓ та в╕дправля╓ поштою лог-файли
 Name:		logrotate
 Version:	3.6.5
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
@@ -59,18 +59,18 @@ logi raz dziennie, raz na miesi╠c, raz na tydzieЯ lub wtedy kiedy
 pliki z logami systemowymi s╠ ju© du©e.
 
 %description -l pt_BR
-Logrotate foi projetado para facilitar a administraГЦo de sistemas
-que geram grande nЗmero de arquivos de log. Permite automatizaГЦo
-na rotaГЦo, compressЦo, remoГЦo e envio de mail de arquivos de
-logs. Cada arquivo de log pode ser tratado diariamente, semanalmente,
-mensalmente ou quanto crescer demais.
+Logrotate foi projetado para facilitar a administraГЦo de sistemas que
+geram grande nЗmero de arquivos de log. Permite automatizaГЦo na
+rotaГЦo, compressЦo, remoГЦo e envio de mail de arquivos de logs. Cada
+arquivo de log pode ser tratado diariamente, semanalmente, mensalmente
+ou quanto crescer demais.
 
 %description -l ru
-Logrotate предназначен для облегчения администрирования системы, которая
-генерирует большое количество файлов с логами. Он позволяет автоматически
-ротировать, компрессировать, удалять и посылать файлы с логами по e-mail.
-Каждый лог может обрабатываться ежедневно, еженедельно, ежемесячно или по
-достижении определенного размера.
+Logrotate предназначен для облегчения администрирования системы,
+которая генерирует большое количество файлов с логами. Он позволяет
+автоматически ротировать, компрессировать, удалять и посылать файлы с
+логами по e-mail. Каждый лог может обрабатываться ежедневно,
+еженедельно, ежемесячно или по достижении определенного размера.
 
 %description -l tr
 logrotate Гok fazla sayЩda gЭnlЭk dosyasЩ Эreten sistemlerin
@@ -80,11 +80,11 @@ mektup olarak yollanmasЩnЩ saПlar. Her dosya gЭnlЭk, haftalЩk, aylЩk
 olarak ya da Гok bЭyЭk boyutlara ulaЧtЩПЩnda iЧlenebilir.
 
 %description -l uk
-Logrotate призначений для полегшення адм╕н╕стрування системи, яка генеру╓
-велику к╕льк╕сть файл╕в з логами. В╕н дозволя╓ автоматично ротувати,
-компресувати, видаляти та посилати поштою лог-файли. Кожен лог може
-оброблятися щоденно, щотижня, щом╕сяця або по досягненн╕ визначеного
-розм╕ру.
+Logrotate призначений для полегшення адм╕н╕стрування системи, яка
+генеру╓ велику к╕льк╕сть файл╕в з логами. В╕н дозволя╓ автоматично
+ротувати, компресувати, видаляти та посилати поштою лог-файли. Кожен
+лог може оброблятися щоденно, щотижня, щом╕сяця або по досягненн╕
+визначеного розм╕ру.
 
 %prep
 %setup -q
