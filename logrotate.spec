@@ -6,11 +6,12 @@ Summary(pl):	System rotacji i kompresowania logów
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Name:		logrotate
 Version:	3.6
-Release:	5
+Release:	6
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
 Source1:	%{name}.conf
+Patch0:		%{name}-man.patch
 Requires:	/bin/mail
 Requires(post):	fileutils
 BuildRequires:	popt-devel >= 1.3
@@ -63,6 +64,7 @@ olarak ya da çok büyük boyutlara ulaþtýðýnda iþlenebilir.
 
 %prep
 %setup -q
+%patch -p0
 
 %build
 %{__make} \
