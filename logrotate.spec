@@ -5,12 +5,12 @@ Summary(pl):	Rotacje, kompresowanie, i system logowania.
 Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar.
 Name:		logrotate
 Version:	3.2
-Release:	2
+Release:	3
 Copyright:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
 Source:		ftp://ftp.redhat.com/pub/redhat/code/logrotate/%{name}-%{version}.tar.gz
-Patch:		logrotate-lastlog.patch
+Patch:		logrotate-pld.patch
 BuildPrereq:	popt-devel >= 1.3
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -58,7 +58,11 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d}
 
 make PREFIX=$RPM_BUILD_ROOT install
-install examples/logrotate-default $RPM_BUILD_ROOT/etc/logrotate.conf
+
+install -d $RPM_BUILD_ROOT%{_mandir}
+mv $RPM_BUILD_ROOT/usr/man/man8 $RPM_BUILD_ROOT%{_mandir}
+
+install examples/logrotate.conf.pld $RPM_BUILD_ROOT/etc/logrotate.conf
 install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man8/* \
@@ -73,12 +77,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_sbindir}/logrotate
 %attr(750,root,root) /etc/cron.daily/logrotate
-%attr(640,root,root) %config /etc/logrotate.conf
+%attr(640,root,root) %config(noreplace) %veryfi(not size mtime md5) /etc/*.conf
 %attr(750,root,root) %dir /etc/logrotate.d
 
 %{_mandir}/man8/*
 
 %changelog
+* Thu May 20 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+- added new config file (commpres postrotate && chmod 640 ),
+- removed rotate of /var/log/{wtmp,lastlog}
+  lastlog provides SysVinit, wtmp(x) provides syslogd
+- fixes for build.
+
 * Wed Apr 21 1999 Piotr Czerwiñski <pius@pld.org.pl>
   [3.2-1]
 - updated to 3.2,
@@ -95,9 +105,3 @@ rm -rf $RPM_BUILD_ROOT
   [2.6-4]
 - added pl translation,
 - minor modifications of the spec file.
-
-* Mon Jun 29 1998 Michael Maher <mike@redhat.com>
-- Fixed bug 490, last log shouldn't get rotated.
-
-* Thu May 07 1998 Prospector System <bugs@redhat.com>
-- translations modified for de, fr, tr
