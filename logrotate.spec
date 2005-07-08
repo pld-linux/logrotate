@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	selinux
+%bcond_without	selinux		# build without SELinux support
 #
 Summary:	Rotates, compresses, removes and mails system log files
 Summary(de):	Rotiert, komprimiert und verschickt Systemlogs
@@ -14,7 +14,7 @@ Summary(uk):	Роту╓, компресу╓, видаля╓ та в╕дправля╓ поштою лог-файли
 Name:		logrotate
 Version:	3.7
 Release:	3
-License:	GPL
+License:	GPL v2
 Group:		Applications/System
 Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	caa28cb5e26db34f7c14236e4058bb5f
