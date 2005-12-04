@@ -26,10 +26,10 @@ Patch2:		%{name}-maxage.dif
 Patch3:		%{name}-noexec-tmp.patch
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	popt-devel >= 1.3
+Requires(post):	fileutils
 Requires:	/bin/mail
 Requires:	crondaemon
-Requires(post):	fileutils
-PreReq:		setup >= 2.4.6
+Requires:	setup >= 2.4.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		statdir		/var/lib/misc
@@ -144,7 +144,7 @@ fi
 %attr(755,root,root) %{_sbindir}/logrotate
 %attr(750,root,root) %dir /etc/logrotate.d
 %attr(750,root,root) /etc/cron.daily/logrotate
-%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/*.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
 %attr(640,root,root) %ghost %{statdir}/logrotate.status
 %attr(750,root,logs) %dir /var/log/archiv
 %{_mandir}/man8/*
