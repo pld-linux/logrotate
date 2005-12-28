@@ -1,0 +1,4 @@
+- release 2
+- fixed executing scripts from /tmp
+  (use /bin/sh -c command as /tmp can be mounted noexec)
+- I don't care for TODO, you had two months to do it
