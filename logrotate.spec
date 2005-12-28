@@ -141,7 +141,7 @@ if [ ! -L /var/log/archiv ]; then
 		fi
 	fi
 
-	# always have httpd.conf symlink (until all packages from Ac use new dir)
+	# always have archiv symlink (until all packages from Ac use new dir)
 	ln -s archive /var/log/archiv
 fi
 exit 0
