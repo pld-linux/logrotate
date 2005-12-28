@@ -13,7 +13,7 @@ Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Summary(uk):	òÏÔÕ¤, ËÏÍÐÒÅÓÕ¤, ×ÉÄÁÌÑ¤ ÔÁ ×¦ÄÐÒÁ×ÌÑ¤ ÐÏÛÔÏÀ ÌÏÇ-ÆÁÊÌÉ
 Name:		logrotate
 Version:	3.7
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		Applications/System
 Source0:	%{name}-%{version}.tar.gz
@@ -115,7 +115,7 @@ Logrotate ÐÒÉÚÎÁÞÅÎÉÊ ÄÌÑ ÐÏÌÅÇÛÅÎÎÑ ÁÄÍ¦Î¦ÓÔÒÕ×ÁÎÎÑ ÓÉÓÔÅÍÉ, ÑËÁ
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d} \
-	$RPM_BUILD_ROOT{%{_mandir},%{statdir},/var/log/archiv}
+	$RPM_BUILD_ROOT{%{_mandir},%{statdir},/var/log/archive}
 
 %{__make} install \
 	BINDIR=$RPM_BUILD_ROOT%{_sbindir} \
@@ -124,9 +124,27 @@ install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d} \
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
 install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 > $RPM_BUILD_ROOT%{statdir}/logrotate.status
+> $RPM_BUILD_ROOT/var/log/archiv
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%pre
+# change /var/log/archiv to /var/log/archive
+if [ ! -L /var/log/archiv ]; then
+	if [ -d /var/log/archiv ]; then
+		if [ -d /var/log/archive ]; then
+			mv /var/log/archiv/* /var/log/archive
+			rmdir /var/log/archiv 2>/dev/null || mv -v /var/log/archiv{,.rpmsave}
+		else
+			mv /var/log/archiv /var/log/archive
+		fi
+	fi
+
+	# always have httpd.conf symlink (until all packages from Ac use new dir)
+	ln -s archive /var/log/archiv
+fi
+exit 0
 
 %post
 if [ -f /var/lib/logrotate.status ]; then
@@ -146,5 +164,6 @@ fi
 %attr(750,root,root) /etc/cron.daily/logrotate
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
 %attr(640,root,root) %ghost %{statdir}/logrotate.status
-%attr(750,root,logs) %dir /var/log/archiv
+%attr(750,root,logs) %dir /var/log/archive
+%ghost /var/log/archiv
 %{_mandir}/man8/*
