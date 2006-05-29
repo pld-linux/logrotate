@@ -13,7 +13,7 @@ Summary(tr):	Sistem günlüklerini yönlendirir, sýkýþtýrýr ve mektup olarak yollar
 Summary(uk):	òÏÔÕ¤, ËÏÍÐÒÅÓÕ¤, ×ÉÄÁÌÑ¤ ÔÁ ×¦ÄÐÒÁ×ÌÑ¤ ÐÏÛÔÏÀ ÌÏÇ-ÆÁÊÌÉ
 Name:		logrotate
 Version:	3.7.4
-Release:	0.1
+Release:	0.2
 License:	GPL v2
 Group:		Applications/System
 Source0:	%{name}-%{version}.tar.gz
@@ -25,6 +25,7 @@ BuildRequires:	popt-devel >= 1.3
 Requires(post):	fileutils
 Requires:	/bin/mail
 Requires:	crondaemon
+Requires:	gzip
 Requires:	setup >= 2.4.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
