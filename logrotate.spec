@@ -136,6 +136,7 @@ if [ ! -L /var/log/archiv ]; then
 	fi
 
 	# always have archiv symlink (until all packages from Ac use new dir)
+	install -d /var/log
 	ln -s archive /var/log/archiv
 fi
 exit 0
