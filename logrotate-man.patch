@@ -1,6 +1,5 @@
-diff -urN logrotate-3.6.10.org/logrotate.8 logrotate-3.6.10/logrotate.8
 --- logrotate-3.6.10.org/logrotate.8	2003-08-27 13:13:00.000000000 +0200
-+++ logrotate-3.6.10/logrotate.8	2003-08-27 13:13:07.000000000 +0200
++++ logrotate-3.7.4/logrotate.8	2006-05-29 22:26:25.567007681 +0300
 @@ -20,7 +20,7 @@
  in which the \fBlogrotate\fR config files are listed in is important.
  Normally, a single config file which includes any other config files
@@ -51,7 +50,7 @@ diff -urN logrotate-3.6.10.org/logrotate.8 logrotate-3.6.10/logrotate.8
  
  .TP
  \fBsharedscripts\fR
-@@ -385,13 +385,13 @@
+@@ -417,7 +417,7 @@
  Log files are rotated if the current weekday is less then the weekday
  of the last rotation or if more then a week has passed since the last
  rotation. This is normally the same as rotating logs on the first day
@@ -59,10 +58,12 @@ diff -urN logrotate-3.6.10.org/logrotate.8 logrotate-3.6.10/logrotate.8
 +of the week, but it works better if \fBlogrotate\fR is not run every
  night.
  
+ .TP
+@@ -427,7 +427,7 @@
  .SH FILES
  .PD 0
  .TP 27
--\fI/var/lib/logrotate/status\fR
+-\fI/var/lib/logrotate.status\fR
 +\fI/var/lib/misc/logrotate.status\fR
  Default state file.
  .TP 27
