@@ -13,9 +13,10 @@ Summary(tr):	Sistem gЭnlЭklerini yЖnlendirir, sЩkЩЧtЩrЩr ve mektup olarak yollar
 Summary(uk):	Роту╓, компресу╓, видаля╓ та в╕дправля╓ поштою лог-файли
 Name:		logrotate
 Version:	3.7.4
-Release:	0.2
+Release:	1
 License:	GPL v2
 Group:		Applications/System
+# extracted from FC src.rpm
 Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	73db959389da200b3a0203446e5fe6a6
 Source1:	%{name}.conf
