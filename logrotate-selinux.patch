@@ -1,0 +1,60 @@
+--- logrotate-3.7.4/logrotate.c~	2006-05-17 10:46:51.000000000 -0400
++++ logrotate-3.7.4/logrotate.c	2006-08-09 18:27:42.000000000 -0400
+@@ -364,8 +364,8 @@
+ #ifdef WITH_SELINUX
+ 	if (selinux_enabled) {
+ 	    security_context_t oldContext;
+-	    if (fgetfilecon(fdcurr, &oldContext) >= 0) {
+-		if (getfscreatecon(&prev_context) < 0) {
++	    if (fgetfilecon_raw(fdcurr, &oldContext) >= 0) {
++		if (getfscreatecon_raw(&prev_context) < 0) {
+ 		    message(MESS_ERROR,
+ 			    "error getting default context: %s\n",
+ 			    strerror(errno));
+@@ -374,7 +374,7 @@
+ 			return 1;
+ 		    }
+ 		}
+-		if (setfscreatecon(oldContext) < 0) {
++		if (setfscreatecon_raw(oldContext) < 0) {
+ 		    message(MESS_ERROR,
+ 			    "error setting file context %s to %s: %s\n",
+ 			    saveLog, oldContext, strerror(errno));
+@@ -397,7 +397,7 @@
+ 	    createOutputFile(saveLog, O_WRONLY | O_CREAT | O_TRUNC, sb);
+ #ifdef WITH_SELINUX
+ 	if (selinux_enabled) {
+-	    setfscreatecon(prev_context);
++	    setfscreatecon_raw(prev_context);
+ 	    if (prev_context != NULL) {
+ 		freecon(prev_context);
+ 		prev_context = NULL;
+@@ -753,8 +753,8 @@
+ #ifdef WITH_SELINUX
+ 	if (selinux_enabled) {
+ 	    security_context_t oldContext = NULL;
+-	    if (getfilecon(log->files[logNum], &oldContext) > 0) {
+-		if (getfscreatecon(&prev_context) < 0) {
++	    if (getfilecon_raw(log->files[logNum], &oldContext) > 0) {
++		if (getfscreatecon_raw(&prev_context) < 0) {
+ 		    message(MESS_ERROR,
+ 			    "error getting default context: %s\n",
+ 			    strerror(errno));
+@@ -763,7 +763,7 @@
+ 			return 1;
+ 		    }
+ 		}
+-		if (setfscreatecon(oldContext) < 0) {
++		if (setfscreatecon_raw(oldContext) < 0) {
+ 		    message(MESS_ERROR,
+ 			    "error setting file context %s to %s: %s\n",
+ 			    log->files[logNum], oldContext,
+@@ -951,7 +951,7 @@
+ 
+ #ifdef WITH_SELINUX
+     if (selinux_enabled) {
+-	setfscreatecon(prev_context);
++	setfscreatecon_raw(prev_context);
+ 	if (prev_context != NULL) {
+ 	    freecon(prev_context);
+ 	    prev_context = NULL;
