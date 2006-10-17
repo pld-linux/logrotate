@@ -1,0 +1,16 @@
+diff -dur -x '*~' logrotate-3.7.4.orig/config.c logrotate-3.7.4/config.c
+--- logrotate-3.7.4.orig/config.c	2006-07-24 12:08:04.000000000 +0000
++++ logrotate-3.7.4/config.c	2006-10-17 08:42:12.000000000 +0000
+@@ -617,10 +617,10 @@
+ 			return 1;
+ 		    }
+ 
+-		    if (!strcmp(opt, "size")) {
++		    if (opt[0] == 's') { /* size */
+ 			newlog->criterium = ROT_SIZE;
+ 			newlog->threshhold = size;
+-		    } else
++		    } else /* minsize */
+ 			newlog->minsize = size;
+ 
+ 		    *endtag = oldchar, start = endtag;

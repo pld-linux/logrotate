@@ -22,6 +22,7 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	%{name}.conf
 Patch0:		%{name}-man.patch
 Patch1:		%{name}-selinux.patch
+Patch2:		%{name}-size.patch
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	popt-devel >= 1.3
 Requires(post):	fileutils
@@ -101,6 +102,7 @@ Logrotate призначений для полегшення адм╕н╕стрування системи, яка
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__make} \
