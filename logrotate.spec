@@ -3,14 +3,14 @@
 %bcond_without	selinux		# build without SELinux support
 #
 Summary:	Rotates, compresses, removes and mails system log files
-Summary(de):	Rotiert, komprimiert und verschickt Systemlogs
-Summary(es):	Hace el rutado, comprime y envМa mail de logs del sistema
-Summary(fr):	Fait tourner, compresse, et envoie par mail les connexions au systХme
-Summary(pl):	System rotacji i kompresowania logСw
-Summary(pt_BR):	Rotaciona, comprime e envia mail de logs do sistema
-Summary(ru):	Ротирует, компрессирует, удаляет и отправляет по почте лог-файлы
-Summary(tr):	Sistem gЭnlЭklerini yЖnlendirir, sЩkЩЧtЩrЩr ve mektup olarak yollar
-Summary(uk):	Роту╓, компресу╓, видаля╓ та в╕дправля╓ поштою лог-файли
+Summary(de.UTF-8):   Rotiert, komprimiert und verschickt Systemlogs
+Summary(es.UTF-8):   Hace el rutado, comprime y envц╜a mail de logs del sistema
+Summary(fr.UTF-8):   Fait tourner, compresse, et envoie par mail les connexions au systц╗me
+Summary(pl.UTF-8):   System rotacji i kompresowania logцЁw
+Summary(pt_BR.UTF-8):   Rotaciona, comprime e envia mail de logs do sistema
+Summary(ru.UTF-8):   п═п╬я┌п╦я─я┐п╣я┌, п╨п╬п╪п©я─п╣я│я│п╦я─я┐п╣я┌, я┐п╢п╟п╩я▐п╣я┌ п╦ п╬я┌п©я─п╟п╡п╩я▐п╣я┌ п©п╬ п©п╬я┤я┌п╣ п╩п╬пЁ-я└п╟п╧п╩я▀
+Summary(tr.UTF-8):   Sistem gц╪nlц╪klerini yц╤nlendirir, sд╠kд╠е÷tд╠rд╠r ve mektup olarak yollar
+Summary(uk.UTF-8):   п═п╬я┌я┐я■, п╨п╬п╪п©я─п╣я│я┐я■, п╡п╦п╢п╟п╩я▐я■ я┌п╟ п╡я√п╢п©я─п╟п╡п╩я▐я■ п©п╬я┬я┌п╬я▌ п╩п╬пЁ-я└п╟п╧п╩п╦
 Name:		logrotate
 Version:	3.7.4
 Release:	6
@@ -42,61 +42,61 @@ log files. Logrotate can be set to handle a log file daily, weekly,
 monthly or when the log file gets to a certain size. Normally,
 logrotate runs as a daily cron job.
 
-%description -l de
+%description -l de.UTF-8
 Logrotate vereinfacht die Verwaltung von Systemen, die sehr viele
 Log-Dateien erzeugen, indem es das automatische Rotieren,
-Komprimieren, Entfernen, und Senden von Log-Dateien ermЖglicht. Jede
-Log-Datei kann tДglich, wЖchentlich oder monatlich verarbeitet werden,
-wenn sie zu groъ wird.
+Komprimieren, Entfernen, und Senden von Log-Dateien ermц╤glicht. Jede
+Log-Datei kann tц╓glich, wц╤chentlich oder monatlich verarbeitet werden,
+wenn sie zu groц÷ wird.
 
-%description -l es
-Logrotate fue proyectado para facilitar la administraciСn de sistemas
-que generan gran nЗmero de archivos de log. Permite automatizaciСn en
-la rotaciСn, compresiСn, remociСn y envМo de mail de archivos de logs.
+%description -l es.UTF-8
+Logrotate fue proyectado para facilitar la administraciцЁn de sistemas
+que generan gran nц╨mero de archivos de log. Permite automatizaciцЁn en
+la rotaciцЁn, compresiцЁn, remociцЁn y envц╜o de mail de archivos de logs.
 Cada archivo de log puede ser tratado diariamente, semanalmente,
 mensualmente o cuanto crezca demasiado.
 
-%description -l fr
-Logrotate est conГu pour faciliter l'administration de systХmes qui
-gИnИrent un grand nombre de fichiers de \"log\". Il permet le
-roulement, la supprИssion la compression et l'envoi automatiques de
-ces fichiers. Chaque fichier de \"log\" peut Йtre pris en charge de
-maniХre quotidienne, hebdomadaire, mensuelle, ou quand il devient trop
+%description -l fr.UTF-8
+Logrotate est conц╖u pour faciliter l'administration de systц╗mes qui
+gц╘nц╘rent un grand nombre de fichiers de \"log\". Il permet le
+roulement, la supprц╘ssion la compression et l'envoi automatiques de
+ces fichiers. Chaque fichier de \"log\" peut ц╙tre pris en charge de
+maniц╗re quotidienne, hebdomadaire, mensuelle, ou quand il devient trop
 volumineux.
 
-%description -l pl
-Logrotate jest przeznaczony do Ёatwej administracji plikami logСw.
-Program ten pozwala na automatyczn╠ kompresjЙ logСw. Mo©e kontrolowaФ
-logi raz dziennie, raz na miesi╠c, raz na tydzieЯ lub wtedy kiedy
-pliki z logami systemowymi s╠ ju© du©e.
+%description -l pl.UTF-8
+Logrotate jest przeznaczony do е┌atwej administracji plikami logцЁw.
+Program ten pozwala na automatycznд┘ kompresjд≥ logцЁw. Moе╪e kontrolowaд┤
+logi raz dziennie, raz na miesiд┘c, raz na tydzieе└ lub wtedy kiedy
+pliki z logami systemowymi sд┘ juе╪ duе╪e.
 
-%description -l pt_BR
-Logrotate foi projetado para facilitar a administraГЦo de sistemas que
-geram grande nЗmero de arquivos de log. Permite automatizaГЦo na
-rotaГЦo, compressЦo, remoГЦo e envio de mail de arquivos de logs. Cada
+%description -l pt_BR.UTF-8
+Logrotate foi projetado para facilitar a administraц╖цёo de sistemas que
+geram grande nц╨mero de arquivos de log. Permite automatizaц╖цёo na
+rotaц╖цёo, compressцёo, remoц╖цёo e envio de mail de arquivos de logs. Cada
 arquivo de log pode ser tratado diariamente, semanalmente, mensalmente
 ou quanto crescer demais.
 
-%description -l ru
-Logrotate предназначен для облегчения администрирования системы,
-которая генерирует большое количество файлов с логами. Он позволяет
-автоматически ротировать, компрессировать, удалять и посылать файлы с
-логами по e-mail. Каждый лог может обрабатываться ежедневно,
-еженедельно, ежемесячно или по достижении определенного размера.
+%description -l ru.UTF-8
+Logrotate п©я─п╣п╢п╫п╟п╥п╫п╟я┤п╣п╫ п╢п╩я▐ п╬п╠п╩п╣пЁя┤п╣п╫п╦я▐ п╟п╢п╪п╦п╫п╦я│я┌я─п╦я─п╬п╡п╟п╫п╦я▐ я│п╦я│я┌п╣п╪я▀,
+п╨п╬я┌п╬я─п╟я▐ пЁп╣п╫п╣я─п╦я─я┐п╣я┌ п╠п╬п╩я▄я┬п╬п╣ п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ я└п╟п╧п╩п╬п╡ я│ п╩п╬пЁп╟п╪п╦. п·п╫ п©п╬п╥п╡п╬п╩я▐п╣я┌
+п╟п╡я┌п╬п╪п╟я┌п╦я┤п╣я│п╨п╦ я─п╬я┌п╦я─п╬п╡п╟я┌я▄, п╨п╬п╪п©я─п╣я│я│п╦я─п╬п╡п╟я┌я▄, я┐п╢п╟п╩я▐я┌я▄ п╦ п©п╬я│я▀п╩п╟я┌я▄ я└п╟п╧п╩я▀ я│
+п╩п╬пЁп╟п╪п╦ п©п╬ e-mail. п п╟п╤п╢я▀п╧ п╩п╬пЁ п╪п╬п╤п╣я┌ п╬п╠я─п╟п╠п╟я┌я▀п╡п╟я┌я▄я│я▐ п╣п╤п╣п╢п╫п╣п╡п╫п╬,
+п╣п╤п╣п╫п╣п╢п╣п╩я▄п╫п╬, п╣п╤п╣п╪п╣я│я▐я┤п╫п╬ п╦п╩п╦ п©п╬ п╢п╬я│я┌п╦п╤п╣п╫п╦п╦ п╬п©я─п╣п╢п╣п╩п╣п╫п╫п╬пЁп╬ я─п╟п╥п╪п╣я─п╟.
 
-%description -l tr
-logrotate Гok fazla sayЩda gЭnlЭk dosyasЩ Эreten sistemlerin
-yЖnetimini kolaylaЧtЩrmak iГin tasarlanmЩЧtЩr. KayЩt dosyalarЩnЩn
-otomatik olarak yЖnlendirilmesini, sЩkЩЧtЩrЩlmasЩnЩ, silinmesinЩ ve
-mektup olarak yollanmasЩnЩ saПlar. Her dosya gЭnlЭk, haftalЩk, aylЩk
-olarak ya da Гok bЭyЭk boyutlara ulaЧtЩПЩnda iЧlenebilir.
+%description -l tr.UTF-8
+logrotate ц╖ok fazla sayд╠da gц╪nlц╪k dosyasд╠ ц╪reten sistemlerin
+yц╤netimini kolaylaе÷tд╠rmak iц╖in tasarlanmд╠е÷tд╠r. Kayд╠t dosyalarд╠nд╠n
+otomatik olarak yц╤nlendirilmesini, sд╠kд╠е÷tд╠rд╠lmasд╠nд╠, silinmesinд╠ ve
+mektup olarak yollanmasд╠nд╠ saд÷lar. Her dosya gц╪nlц╪k, haftalд╠k, aylд╠k
+olarak ya da ц╖ok bц╪yц╪k boyutlara ulaе÷tд╠д÷д╠nda iе÷lenebilir.
 
-%description -l uk
-Logrotate призначений для полегшення адм╕н╕стрування системи, яка
-генеру╓ велику к╕льк╕сть файл╕в з логами. В╕н дозволя╓ автоматично
-ротувати, компресувати, видаляти та посилати поштою лог-файли. Кожен
-лог може оброблятися щоденно, щотижня, щом╕сяця або по досягненн╕
-визначеного розм╕ру.
+%description -l uk.UTF-8
+Logrotate п©я─п╦п╥п╫п╟я┤п╣п╫п╦п╧ п╢п╩я▐ п©п╬п╩п╣пЁя┬п╣п╫п╫я▐ п╟п╢п╪я√п╫я√я│я┌я─я┐п╡п╟п╫п╫я▐ я│п╦я│я┌п╣п╪п╦, я▐п╨п╟
+пЁп╣п╫п╣я─я┐я■ п╡п╣п╩п╦п╨я┐ п╨я√п╩я▄п╨я√я│я┌я▄ я└п╟п╧п╩я√п╡ п╥ п╩п╬пЁп╟п╪п╦. п▓я√п╫ п╢п╬п╥п╡п╬п╩я▐я■ п╟п╡я┌п╬п╪п╟я┌п╦я┤п╫п╬
+я─п╬я┌я┐п╡п╟я┌п╦, п╨п╬п╪п©я─п╣я│я┐п╡п╟я┌п╦, п╡п╦п╢п╟п╩я▐я┌п╦ я┌п╟ п©п╬я│п╦п╩п╟я┌п╦ п©п╬я┬я┌п╬я▌ п╩п╬пЁ-я└п╟п╧п╩п╦. п п╬п╤п╣п╫
+п╩п╬пЁ п╪п╬п╤п╣ п╬п╠я─п╬п╠п╩я▐я┌п╦я│я▐ я┴п╬п╢п╣п╫п╫п╬, я┴п╬я┌п╦п╤п╫я▐, я┴п╬п╪я√я│я▐я├я▐ п╟п╠п╬ п©п╬ п╢п╬я│я▐пЁп╫п╣п╫п╫я√
+п╡п╦п╥п╫п╟я┤п╣п╫п╬пЁп╬ я─п╬п╥п╪я√я─я┐.
 
 %prep
 %setup -q
