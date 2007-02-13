@@ -3,14 +3,14 @@
 %bcond_without	selinux		# build without SELinux support
 #
 Summary:	Rotates, compresses, removes and mails system log files
-Summary(de.UTF-8):   Rotiert, komprimiert und verschickt Systemlogs
-Summary(es.UTF-8):   Hace el rutado, comprime y envía mail de logs del sistema
-Summary(fr.UTF-8):   Fait tourner, compresse, et envoie par mail les connexions au système
-Summary(pl.UTF-8):   System rotacji i kompresowania logów
-Summary(pt_BR.UTF-8):   Rotaciona, comprime e envia mail de logs do sistema
-Summary(ru.UTF-8):   Ротирует, компрессирует, удаляет и отправляет по почте лог-файлы
-Summary(tr.UTF-8):   Sistem günlüklerini yönlendirir, sıkıştırır ve mektup olarak yollar
-Summary(uk.UTF-8):   Ротує, компресує, видаляє та відправляє поштою лог-файли
+Summary(de.UTF-8):	Rotiert, komprimiert und verschickt Systemlogs
+Summary(es.UTF-8):	Hace el rutado, comprime y envía mail de logs del sistema
+Summary(fr.UTF-8):	Fait tourner, compresse, et envoie par mail les connexions au système
+Summary(pl.UTF-8):	System rotacji i kompresowania logów
+Summary(pt_BR.UTF-8):	Rotaciona, comprime e envia mail de logs do sistema
+Summary(ru.UTF-8):	Ротирует, компрессирует, удаляет и отправляет по почте лог-файлы
+Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup olarak yollar
+Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.7.4
 Release:	6
