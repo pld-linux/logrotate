@@ -128,7 +128,7 @@ install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%pre
+%pretrans
 # change /var/log/archiv to /var/log/archive
 if [ ! -L /var/log/archiv ]; then
 	if [ -d /var/log/archiv ]; then
