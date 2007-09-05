@@ -13,7 +13,7 @@ Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.7.4
-Release:	6
+Release:	7
 License:	GPL v2
 Group:		Applications/System
 # extracted from FC src.rpm
