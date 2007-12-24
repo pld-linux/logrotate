@@ -17,9 +17,7 @@ Release:	1
 License:	GPL v2
 Group:		Applications/System
 # extracted from FC src.rpm
-#Source0:	%{name}-%{version}.tar.gz
-# Temporary link:
-Source0:	http://www.blues.gda.pl/SOURCES/%{name}-%{version}.tar.gz
+Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	cafaaf07c0688398c80ef234d40ec0e4
 Source1:	%{name}.conf
 Patch0:		%{name}-man.patch
