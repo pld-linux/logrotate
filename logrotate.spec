@@ -20,7 +20,7 @@ Group:		Applications/System
 #Source0:	%{name}-%{version}.tar.gz
 # Temporary link:
 Source0:	http://www.blues.gda.pl/SOURCES/%{name}-%{version}.tar.gz
-# Source0-md5:	dcf518fe08ae3825e00b38b909d152d9
+# Source0-md5:	cafaaf07c0688398c80ef234d40ec0e4
 Source1:	%{name}.conf
 Patch0:		%{name}-man.patch
 %{?with_selinux:BuildRequires:	libselinux-devel}
