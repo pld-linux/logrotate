@@ -1,6 +1,6 @@
---- logrotate-3.6.10.org/logrotate.8	2003-08-27 13:13:00.000000000 +0200
-+++ logrotate-3.7.4/logrotate.8	2006-05-29 22:26:25.567007681 +0300
-@@ -20,7 +20,7 @@
+--- ./logrotate.8.org	2007-08-07 11:22:31.000000000 +0200
++++ ./logrotate.8	2007-12-24 13:19:07.000000000 +0100
+@@ -19,7 +19,7 @@
  in which the \fBlogrotate\fR config files are listed in is important.
  Normally, a single config file which includes any other config files
  which are needed should be used.  See below for more information on how
@@ -9,7 +9,7 @@
  is given on the command line, every file in that directory is used as
  a config file.
  .P
-@@ -36,14 +36,14 @@
+@@ -39,14 +39,14 @@
  be made to the logs or to the \fBlogrotate\fR state file.
  
  .TP
@@ -26,7 +26,7 @@
  Tells \fBlogrotate\fR which command to use when mailing logs. This
  command should accept two arguments: 1) the subject of the message, and
  2) the recipient. The command must then read a message on standard input
-@@ -51,10 +51,10 @@
+@@ -54,10 +54,10 @@
  -s\fR.
  
  .TP
@@ -34,12 +34,12 @@
 +\fB-s\fR,\fB -\-state <statefile>\fR
  Tells \fBlogrotate\fR to use an alternate state file.  This is useful
  if logrotate is being run as a different user for various sets of
--log files.  The default state file is \fI/var/lib/logrotate/status\fR.
+-log files.  The default state file is \fI/var/lib/logrotate.status\fR.
 +log files.  The default state file is \fI/var/lib/misc/logrotate.status\fR.
  
  .TP
  \fB-\-usage\fR
-@@ -350,8 +350,8 @@
+@@ -392,8 +392,8 @@
  \fBsize \fIsize\fR
  Log files are rotated when they grow bigger then \fIsize\fR bytes. If
  \fIsize\fR is followed by \fIM\fR, the size if assumed to be in megabytes.
@@ -50,7 +50,7 @@
  
  .TP
  \fBsharedscripts\fR
-@@ -417,7 +417,7 @@
+@@ -439,7 +439,7 @@
  Log files are rotated if the current weekday is less then the weekday
  of the last rotation or if more then a week has passed since the last
  rotation. This is normally the same as rotating logs on the first day
@@ -59,7 +59,7 @@
  night.
  
  .TP
-@@ -427,7 +427,7 @@
+@@ -449,7 +449,7 @@
  .SH FILES
  .PD 0
  .TP 27
