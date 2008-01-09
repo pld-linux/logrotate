@@ -13,14 +13,16 @@ Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.7.6
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/System
 # extracted from FC src.rpm
 Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	cafaaf07c0688398c80ef234d40ec0e4
 Source1:	%{name}.conf
+Source2:	%{name}.sysconfig
 Patch0:		%{name}-man.patch
+Patch1:		%{name}-cron.patch
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	popt-devel >= 1.3
 Requires(post):	fileutils
@@ -99,6 +101,7 @@ Logrotate призначений для полегшення адміністр�
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__make} \
@@ -109,7 +112,7 @@ Logrotate призначений для полегшення адміністр�
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d} \
+install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d,sysconfig} \
 	$RPM_BUILD_ROOT{%{_mandir},%{statdir},/var/log/archive}
 
 %{__make} install \
@@ -117,6 +120,7 @@ install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d} \
 	MANDIR=$RPM_BUILD_ROOT%{_mandir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
+install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/logrotate
 install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 > $RPM_BUILD_ROOT%{statdir}/logrotate.status
 > $RPM_BUILD_ROOT/var/log/archiv
@@ -159,6 +163,7 @@ fi
 %attr(750,root,root) %dir /etc/logrotate.d
 %attr(750,root,root) /etc/cron.daily/logrotate
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/sysconfig/%{name}
 %attr(640,root,root) %ghost %{statdir}/logrotate.status
 %attr(750,root,logs) %dir /var/log/archive
 %ghost /var/log/archiv
