@@ -16,8 +16,8 @@ diff -uNr logrotate-3.7.6.orig/examples/logrotate.cron logrotate-3.7.6/examples/
  EXITVALUE=$?
  if [ $EXITVALUE != 0 ]; then
      /usr/bin/logger -t logrotate "ALERT exited abnormally with [$EXITVALUE]"
-+	if [ "${MAILTO}" != "" ]; then
-+		echo "ALERT exited abnormally with [$EXITVALUE]" |  mail -s "logrotate exited abnormally" ${MAILTO}
-+	fi
++    if [ "${MAILTO}" != "" ]; then
++	echo "ALERT exited abnormally with [$EXITVALUE]" |  mail -s "logrotate exited abnormally" ${MAILTO}
++    fi
  fi
  exit 0
