@@ -18,7 +18,7 @@ Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.7.6
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		Applications/System
 # Source0Download: ftp://download.fedora.redhat.com/pub/fedora/linux/updates/8/SRPMS/logrotate-3.7.6-2.2.fc8.src.rpm
