@@ -1,3 +1,8 @@
+# TODO
+# - bug: when logrotate.status is written truncated (due disk getting full) and
+#   the line is partial, it will complain erronously that the line is too long
+#   while it just doesn't have the second DATE column. and that error should be
+#   ignored as warning not fatal as error.
 #
 # Conditional build:
 %bcond_without	selinux		# build without SELinux support
@@ -13,16 +18,17 @@ Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.7.6
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications/System
-# extracted from FC src.rpm
+# Source0Download: ftp://download.fedora.redhat.com/pub/fedora/linux/updates/8/SRPMS/logrotate-3.7.6-2.2.fc8.src.rpm
 Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	cafaaf07c0688398c80ef234d40ec0e4
 Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-man.patch
 Patch1:		%{name}-cron.patch
+Patch2:		%{name}-selinux.patch
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	popt-devel >= 1.3
 Requires(post):	fileutils
@@ -102,6 +108,7 @@ Logrotate призначений для полегшення адміністр�
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__make} \
@@ -163,7 +170,7 @@ fi
 %attr(750,root,root) %dir /etc/logrotate.d
 %attr(750,root,root) /etc/cron.daily/logrotate
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/sysconfig/%{name}
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
 %attr(640,root,root) %ghost %{statdir}/logrotate.status
 %attr(750,root,logs) %dir /var/log/archive
 %ghost /var/log/archiv
