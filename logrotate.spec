@@ -17,18 +17,17 @@ Summary(ru.UTF-8):	Ротирует, компрессирует, удаляет 
 Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup olarak yollar
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
-Version:	3.7.6
-Release:	4
+Version:	3.7.7
+Release:	1
 License:	GPL v2
 Group:		Applications/System
-# Source0Download: ftp://download.fedora.redhat.com/pub/fedora/linux/updates/8/SRPMS/logrotate-3.7.6-2.2.fc8.src.rpm
-Source0:	%{name}-%{version}.tar.gz
-# Source0-md5:	cafaaf07c0688398c80ef234d40ec0e4
+Source0:	https://fedorahosted.org/releases/l/o/logrotate/%{name}-%{version}.tar.gz
+# Source0-md5:	431e135abb7f3fe19de4c6a65bb66823
 Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-man.patch
 Patch1:		%{name}-cron.patch
-Patch2:		%{name}-selinux.patch
+URL:		https://fedorahosted.org/logrotate/
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	popt-devel >= 1.3
 Requires(post):	fileutils
@@ -108,7 +107,6 @@ Logrotate призначений для полегшення адміністр�
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 %{__make} \
