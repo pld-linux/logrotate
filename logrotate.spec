@@ -138,15 +138,19 @@ rm -rf $RPM_BUILD_ROOT
 if [ ! -L /var/log/archiv ]; then
 	if [ -d /var/log/archiv ]; then
 		if [ -d /var/log/archive ]; then
-			mv /var/log/archiv/* /var/log/archive
-			rmdir /var/log/archiv 2>/dev/null || mv -v /var/log/archiv{,.rpmsave}
+			if [ ! -L /var/log/archive ]; then
+				mv /var/log/archiv/* /var/log/archive
+				rmdir /var/log/archiv 2>/dev/null || mv -v /var/log/archiv{,.rpmsave}
+			else
+				mv -v /var/log/archive{,.rpmsave}
+				mv /var/log/archiv /var/log/archive
+			fi
 		else
 			mv /var/log/archiv /var/log/archive
 		fi
 	fi
 
 	# always have archiv symlink (until all packages from Ac use new dir)
-	install -d /var/log
 	ln -s archive /var/log/archiv
 fi
 exit 0
