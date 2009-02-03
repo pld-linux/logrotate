@@ -26,6 +26,7 @@ Source0:	https://fedorahosted.org/releases/l/o/logrotate/%{name}-%{version}.tar.
 Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-cron.patch
+Patch1:		%{name}-man.patch
 URL:		https://fedorahosted.org/logrotate/
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	popt-devel >= 1.3
@@ -105,6 +106,7 @@ Logrotate призначений для полегшення адміністр�
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__make} \
