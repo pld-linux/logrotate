@@ -1,32 +1,6 @@
---- ./logrotate.8.org	2007-08-07 11:22:31.000000000 +0200
-+++ ./logrotate.8	2007-12-24 13:19:07.000000000 +0100
-@@ -19,7 +19,7 @@
- in which the \fBlogrotate\fR config files are listed in is important.
- Normally, a single config file which includes any other config files
- which are needed should be used.  See below for more information on how
--to use the \fIinclude\fR directive to accomplish this.  If a directory
-+to use the \fBinclude\fR directive to accomplish this.  If a directory
- is given on the command line, every file in that directory is used as
- a config file.
- .P
-@@ -39,14 +39,14 @@
- be made to the logs or to the \fBlogrotate\fR state file.
- 
- .TP
--\fB-f, -\-force\fR
-+\fB-f\fR,\fB -\-force\fR
- Tells \fBlogrotate\fR to force the rotation, even if it doesn't think
- this is necessary.  Sometimes this is useful after adding new entries to
- \fBlogrotate\fR, or if old log files have been removed by hand, as the
- new files will be created, and logging will continue correctly.
- 
- .TP
--\fB-m, -\-mail <command>\fR
-+\fB-m\fR,\fB -\-mail <command>\fR
- Tells \fBlogrotate\fR which command to use when mailing logs. This
- command should accept two arguments: 1) the subject of the message, and
- 2) the recipient. The command must then read a message on standard input
-@@ -54,10 +54,10 @@
+--- logrotate-3.7.8/logrotate.8.orig	2008-12-06 15:05:40.000000000 +0100
++++ logrotate-3.7.8/logrotate.8	2009-02-03 07:37:38.410450504 +0100
+@@ -52,10 +52,10 @@
  -s\fR.
  
  .TP
@@ -39,27 +13,36 @@
  
  .TP
  \fB-\-usage\fR
-@@ -392,8 +392,8 @@
- \fBsize \fIsize\fR
- Log files are rotated when they grow bigger then \fIsize\fR bytes. If
- \fIsize\fR is followed by \fIM\fR, the size if assumed to be in megabytes.
--If the \fIk\fR is used, the size is in kilobytes. So \fBsize 100\fR,
--\fIsize 100k\fR, and \fIsize 100M\fR are all valid.
-+If the \fIk\fR is used, the size is in kilobytes. So \fBsize \fI100\fR,
-+\fBsize \fI100k\fR, and \fBsize \fI100M\fR are all valid.
+@@ -118,7 +118,7 @@
+ \fI/var/log/messages\fR. The log will go through five weekly rotations before
+ being removed. After the log file has been rotated (but before the old
+ version of the log has been compressed), the command 
+-\fI/sbin/killall -HUP syslogd\fR will be executed.
++\fI/usr/bin/killall -HUP syslogd\fR will be executed.
+ 
+ The next section defines the parameters for both
+ \fI/var/log/httpd/access.log\fR and \fI/var/log/httpd/error.log\fR.
+@@ -402,8 +402,8 @@
+ Log files are rotated when they grow bigger than \fIsize\fR bytes. If
+ \fIsize\fR is followed by \fIk\fR, the size is assumed to be in kilobytes.
+ If the \fIM\fR is used, the size is in megabytes, and if \fIG\fR is used, the
+-size is in gigabytes. So \fBsize 100\fR, \fIsize 100k\fR, \fIsize 100M\fR and
+-\fIsize 100G\f are all valid.
++size is in gigabytes. So \fBsize \fI100\fR, \fBsize \fI100k\fR, \fBsize \fI100M\fR and
++\fBsize \fI100G\f are all valid.
  
  .TP
  \fBsharedscripts\fR
-@@ -439,7 +439,7 @@
- Log files are rotated if the current weekday is less then the weekday
- of the last rotation or if more then a week has passed since the last
+@@ -449,7 +449,7 @@
+ Log files are rotated if the current weekday is less than the weekday
+ of the last rotation or if more than a week has passed since the last
  rotation. This is normally the same as rotating logs on the first day
 -of the week, but it works better if \fIlogrotate\fR is not run every
 +of the week, but it works better if \fBlogrotate\fR is not run every
  night.
  
  .TP
-@@ -449,7 +449,7 @@
+@@ -459,7 +459,7 @@
  .SH FILES
  .PD 0
  .TP 27
