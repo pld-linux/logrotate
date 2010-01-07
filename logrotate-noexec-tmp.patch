@@ -1,0 +1,11 @@
+--- logrotate-3.7/logrotate.c~	2004-05-11 13:18:32.019683640 +0200
++++ logrotate-3.7/logrotate.c	2004-05-11 13:28:56.154800680 +0200
+@@ -125,7 +125,7 @@
+     close(fd);
+ 
+     if (!fork()) {
+-	execlp(filespec, logfn, NULL);
++	execlp("/bin/sh", "-c", filespec, logfn, NULL);
+ 	exit(1);
+     }
+ 
