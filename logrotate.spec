@@ -18,7 +18,7 @@ Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.7.8
-Release:	7
+Release:	8
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://fedorahosted.org/releases/l/o/logrotate/%{name}-%{version}.tar.gz
@@ -32,7 +32,7 @@ URL:		https://fedorahosted.org/logrotate/
 BuildRequires:	popt-devel >= 1.3
 Requires:	coreutils
 Requires:	crondaemon
-Requires:	filesystem >= 3.0-22
+Requires:	filesystem >= 3.0-34
 Requires:	gzip
 Requires:	setup >= 2.4.6
 Suggests:	/bin/mail
@@ -119,7 +119,7 @@ Logrotate призначений для полегшення адміністр�
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d,sysconfig} \
-	$RPM_BUILD_ROOT{%{_mandir},%{statdir},/var/log/archive}
+	$RPM_BUILD_ROOT{%{_mandir},%{statdir}}
 
 %{__make} install \
 	BINDIR=$RPM_BUILD_ROOT%{_sbindir} \
@@ -132,25 +132,6 @@ install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%pretrans
-# change /var/log/archiv to /var/log/archive
-if [ ! -L /var/log/archiv ]; then
-	if [ -d /var/log/archiv ]; then
-		if [ -d /var/log/archive ]; then
-			if [ ! -L /var/log/archive ]; then
-				mv /var/log/archiv/* /var/log/archive
-				rmdir /var/log/archiv 2>/dev/null || mv -v /var/log/archiv{,.rpmsave}
-			else
-				mv -v /var/log/archive{,.rpmsave}
-				mv /var/log/archiv /var/log/archive
-			fi
-		else
-			mv /var/log/archiv /var/log/archive
-		fi
-	fi
-fi
-exit 0
 
 %triggerpostun -- %{name} < 3.7.8-4
 %{__sed} -i -e 's,olddir /var/log/archiv$,olddir /var/log/archive,' %{_sysconfdir}/logrotate.conf %{_sysconfdir}/logrotate.d/* || :
@@ -173,5 +154,4 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
 %attr(640,root,root) %ghost %{statdir}/logrotate.status
-%attr(750,root,logs) %dir /var/log/archive
 %{_mandir}/man8/logrotate.8*
