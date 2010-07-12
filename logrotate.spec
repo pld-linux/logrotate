@@ -17,12 +17,12 @@ Summary(ru.UTF-8):	Ротирует, компрессирует, удаляет 
 Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup olarak yollar
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
-Version:	3.7.8
-Release:	8
+Version:	3.7.9
+Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://fedorahosted.org/releases/l/o/logrotate/%{name}-%{version}.tar.gz
-# Source0-md5:	b3589bea6d8d5afc8a84134fddaae973
+# Source0-md5:	eeba9dbca62a9210236f4b83195e4ea5
 Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-cron.patch
@@ -125,9 +125,9 @@ install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d,sysconfig} \
 	BINDIR=$RPM_BUILD_ROOT%{_sbindir} \
 	MANDIR=$RPM_BUILD_ROOT%{_mandir}
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
-install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/logrotate
-install examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
+cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
+cp -a %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/logrotate
+install -p examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 > $RPM_BUILD_ROOT%{statdir}/logrotate.status
 
 %clean
@@ -154,4 +154,5 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
 %attr(640,root,root) %ghost %{statdir}/logrotate.status
+%{_mandir}/man5/logrotate.conf.5*
 %{_mandir}/man8/logrotate.8*
