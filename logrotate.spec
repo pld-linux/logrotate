@@ -5,6 +5,7 @@
 #   ignored as warning not fatal as error.
 #
 # Conditional build:
+%bcond_without	acl		# build without ACLs support
 %bcond_without	selinux		# build without SELinux support
 #
 Summary:	Rotates, compresses, removes and mails system log files
@@ -28,6 +29,7 @@ Source2:	%{name}.sysconfig
 Patch0:		%{name}-cron.patch
 Patch1:		%{name}-man.patch
 URL:		https://fedorahosted.org/logrotate/
+%{?with_acl:BuildRequires:	acl-devel}
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	popt-devel >= 1.3
 Requires:	coreutils
@@ -113,6 +115,7 @@ Logrotate призначений для полегшення адміністр�
 %{__make} \
 	CC="%{__cc}" \
 	RPM_OPT_FLAGS="%{rpmcflags}" \
+	WITH_ACL=%{?with_acl:yes}%{!?with_acl:no} \
 	WITH_SELINUX=%{?with_selinux:yes}%{!?with_selinux:no} \
 	STATEFILE="%{statdir}/logrotate.status"
 
