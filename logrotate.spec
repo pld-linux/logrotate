@@ -18,12 +18,12 @@ Summary(ru.UTF-8):	Ротирует, компрессирует, удаляет 
 Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup olarak yollar
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
-Version:	3.8.0
+Version:	3.8.1
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://fedorahosted.org/releases/l/o/logrotate/%{name}-%{version}.tar.gz
-# Source0-md5:	590f77c13077a4c384dbec7ca9c5f242
+# Source0-md5:	bd2e20d8dc644291b08f9215397d28a5
 Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-cron.patch

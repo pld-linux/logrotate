@@ -3,7 +3,7 @@
 @@ -1,8 +1,18 @@
  #!/bin/sh
  
--/usr/sbin/logrotate /etc/logrotate.conf >/dev/null 2>&1
+-/usr/sbin/logrotate /etc/logrotate.conf
 +MAILTO=""
 +ARG=""
 +
