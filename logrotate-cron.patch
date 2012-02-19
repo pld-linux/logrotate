@@ -11,7 +11,7 @@
 +	. /etc/sysconfig/logrotate
 +fi
 +
-+/usr/sbin/logrotate $ARG /etc/logrotate.conf >/dev/null 2>&1
++/usr/sbin/logrotate $ARG /etc/logrotate.conf
  EXITVALUE=$?
  if [ $EXITVALUE != 0 ]; then
 -    /usr/bin/logger -t logrotate "ALERT exited abnormally with [$EXITVALUE]"
