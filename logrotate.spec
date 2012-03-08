@@ -19,7 +19,7 @@ Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.8.1
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://fedorahosted.org/releases/l/o/logrotate/%{name}-%{version}.tar.gz
@@ -28,6 +28,7 @@ Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-cron.patch
 Patch1:		%{name}-man.patch
+Patch2:		tabooext.patch
 URL:		https://fedorahosted.org/logrotate/
 %{?with_acl:BuildRequires:	acl-devel}
 %{?with_selinux:BuildRequires:	libselinux-devel}
@@ -110,6 +111,7 @@ Logrotate призначений для полегшення адміністр�
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__make} \
@@ -128,8 +130,8 @@ install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d,sysconfig} \
 	BINDIR=$RPM_BUILD_ROOT%{_sbindir} \
 	MANDIR=$RPM_BUILD_ROOT%{_mandir}
 
-cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
-cp -a %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/logrotate
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/logrotate
 install -p examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 > $RPM_BUILD_ROOT%{statdir}/logrotate.status
 
