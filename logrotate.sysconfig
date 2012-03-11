@@ -1,7 +1,7 @@
 # Customized settings for logrotate
 
 # send logrotate errors information by mail to
-MAILTO="root"
+#MAILTO="root"
 
 # additional logrotate arguments
 ARG=""
