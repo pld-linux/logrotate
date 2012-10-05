@@ -22,17 +22,6 @@
  
  The next section defines the parameters for both
  \fI/var/log/httpd/access.log\fR and \fI/var/log/httpd/error.log\fR.
-@@ -402,8 +402,8 @@
- Log files are rotated when they grow bigger than \fIsize\fR bytes. If
- \fIsize\fR is followed by \fIk\fR, the size is assumed to be in kilobytes.
- If the \fIM\fR is used, the size is in megabytes, and if \fIG\fR is used, the
--size is in gigabytes. So \fBsize 100\fR, \fIsize 100k\fR, \fIsize 100M\fR and
--\fIsize 100G\f are all valid.
-+size is in gigabytes. So \fBsize \fI100\fR, \fBsize \fI100k\fR, \fBsize \fI100M\fR and
-+\fBsize \fI100G\f are all valid.
- 
- .TP
- \fBsharedscripts\fR
 @@ -449,7 +449,7 @@
  Log files are rotated if the current weekday is less than the weekday
  of the last rotation or if more than a week has passed since the last
