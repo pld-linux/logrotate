@@ -1,0 +1,4 @@
+MAILTO=root
+
+# logrotate to run daily
+02 5 * * * root /usr/lib/logrotate

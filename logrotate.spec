@@ -28,6 +28,7 @@ Source0:	https://fedorahosted.org/releases/l/o/logrotate/%{name}-%{version}.tar.
 Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Source3:	%{name}.cron
+Source4:	%{name}.crontab
 Patch1:		%{name}-man.patch
 Patch2:		tabooext.patch
 URL:		https://fedorahosted.org/logrotate/
@@ -44,6 +45,7 @@ Suggests:	/bin/mail
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		statdir		/var/lib/misc
+%define		_libexecdir	%{_prefix}/lib
 
 %description
 The logrotate utility is designed to simplify the administration of
@@ -128,23 +130,30 @@ Logrotate призначений для полегшення адміністр�
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d,sysconfig} \
-	$RPM_BUILD_ROOT{%{_mandir},%{statdir}}
+install -d $RPM_BUILD_ROOT/etc/{cron.d,logrotate.d,sysconfig} \
+	$RPM_BUILD_ROOT{%{_libexecdir},%{_mandir},%{statdir}}
 
 %{__make} install \
 	BINDIR=$RPM_BUILD_ROOT%{_sbindir} \
 	MANDIR=$RPM_BUILD_ROOT%{_mandir}
 
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
-cp -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/logrotate
-install -p %{SOURCE3} $RPM_BUILD_ROOT/etc/cron.daily/logrotate
-> $RPM_BUILD_ROOT%{statdir}/logrotate.status
+cp -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/%{name}
+install -p %{SOURCE3} $RPM_BUILD_ROOT%{_libexecdir}/%{name}
+cp -p %{SOURCE4} $RPM_BUILD_ROOT/etc/cron.d/%{name}
+> $RPM_BUILD_ROOT%{statdir}/%{name}.status
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%triggerun -- %{name} < 3.8.6-1
+# if previous install had /etc/cron.daily/* files unlink (missingok), disable the cronjob
+if [ ! -e /etc/cron.daily/%{name} ]; then
+	echo DISABLE_LOGROTATE_CRON=yes >> /etc/sysconfig/%{name}
+fi
+
 %triggerpostun -- %{name} < 3.7.8-4
-%{__sed} -i -e 's,olddir /var/log/archiv$,olddir /var/log/archive,' %{_sysconfdir}/logrotate.conf %{_sysconfdir}/logrotate.d/* || :
+%{__sed} -i -e 's,olddir /var/log/archiv$,olddir /var/log/archive,' %{_sysconfdir}/%{name}.conf %{_sysconfdir}/logrotate.d/* || :
 
 %post
 if [ -f /var/lib/logrotate.status ]; then
@@ -160,9 +169,10 @@ fi
 %defattr(644,root,root,755)
 %doc CHANGES
 %attr(755,root,root) %{_sbindir}/logrotate
-%attr(750,root,root) /etc/cron.daily/logrotate
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
+%attr(755,root,root) %{_libexecdir}/logrotate
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}.conf
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/cron.d/%{name}
 %attr(640,root,root) %ghost %{statdir}/logrotate.status
 %{_mandir}/man5/logrotate.conf.5*
 %{_mandir}/man8/logrotate.8*
