@@ -33,6 +33,7 @@ Patch2:		tabooext.patch
 URL:		https://fedorahosted.org/logrotate/
 %{?with_acl:BuildRequires:	acl-devel}
 %{?with_selinux:BuildRequires:	libselinux-devel}
+%{?with_selinux:BuildRequires:	libselinux-utils}
 BuildRequires:	popt-devel >= 1.3
 Requires:	coreutils
 Requires:	crondaemon
