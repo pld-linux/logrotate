@@ -7,7 +7,7 @@
 # Conditional build:
 %bcond_without	acl		# build without ACLs support
 %bcond_without	selinux		# build without SELinux support
-%bcond_without	tests	# do not perform "make test"
+%bcond_without	tests		# do not perform "make test"
 
 Summary:	Rotates, compresses, removes and mails system log files
 Summary(de.UTF-8):	Rotiert, komprimiert und verschickt Systemlogs
@@ -33,8 +33,10 @@ Patch1:		%{name}-man.patch
 Patch2:		tabooext.patch
 URL:		https://fedorahosted.org/logrotate/
 %{?with_acl:BuildRequires:	acl-devel}
-%{?with_selinux:BuildRequires:	libselinux-devel}
-%{?with_selinux:BuildRequires:	libselinux-utils}
+%if %{with selinux}
+BuildRequires:	libselinux-devel
+%{?with_tests:BuildRequires:	libselinux-utils}
+%endif
 BuildRequires:	popt-devel >= 1.3
 Requires:	coreutils
 Requires:	crondaemon
