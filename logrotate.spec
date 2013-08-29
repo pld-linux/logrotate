@@ -27,7 +27,7 @@ Source0:	https://fedorahosted.org/releases/l/o/logrotate/%{name}-%{version}.tar.
 # Source0-md5:	cd0082bbd7248e627ec659f2442fcdf9
 Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
-Patch0:		%{name}-cron.patch
+Source3:	%{name}.cron
 Patch1:		%{name}-man.patch
 Patch2:		tabooext.patch
 URL:		https://fedorahosted.org/logrotate/
@@ -111,7 +111,6 @@ Logrotate призначений для полегшення адміністр�
 
 %prep
 %setup -q
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 
@@ -137,8 +136,8 @@ install -d $RPM_BUILD_ROOT/etc/{cron.daily,logrotate.d,sysconfig} \
 	MANDIR=$RPM_BUILD_ROOT%{_mandir}
 
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
-cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/logrotate
-install -p examples/logrotate.cron $RPM_BUILD_ROOT/etc/cron.daily/logrotate
+cp -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/logrotate
+install -p %{SOURCE3} $RPM_BUILD_ROOT/etc/cron.daily/logrotate
 > $RPM_BUILD_ROOT%{statdir}/logrotate.status
 
 %clean
