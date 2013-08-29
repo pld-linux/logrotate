@@ -1,24 +1,20 @@
---- logrotate-3.7.8/logrotate.8.orig	2008-12-06 15:05:40.000000000 +0100
-+++ logrotate-3.7.8/logrotate.8	2009-02-03 07:37:38.410450504 +0100
-@@ -52,10 +52,10 @@
- -s\fR.
- 
- .TP
--\fB-s, -\-state <statefile>\fR
-+\fB-s\fR,\fB -\-state <statefile>\fR
+--- logrotate-3.8.5/logrotate.8~	2013-08-29 17:03:00.000000000 +0300
++++ logrotate-3.8.5/logrotate.8	2013-08-29 17:05:44.974064909 +0300
+@@ -59,7 +59,7 @@
+ \fB\-s\fR, \fB\-\-state <statefile>\fR
  Tells \fBlogrotate\fR to use an alternate state file.  This is useful
  if logrotate is being run as a different user for various sets of
 -log files.  The default state file is \fI/var/lib/logrotate.status\fR.
 +log files.  The default state file is \fI/var/lib/misc/logrotate.status\fR.
  
  .TP
- \fB-\-usage\fR
-@@ -118,7 +118,7 @@
+ \fB\-\-usage\fR
+@@ -125,7 +125,7 @@
  \fI/var/log/messages\fR. The log will go through five weekly rotations before
  being removed. After the log file has been rotated (but before the old
  version of the log has been compressed), the command 
--\fI/sbin/killall -HUP syslogd\fR will be executed.
-+\fI/usr/bin/killall -HUP syslogd\fR will be executed.
+-\fI/sbin/killall \-HUP syslogd\fR will be executed.
++\fI/usr/bin/killall \-HUP syslogd\fR will be executed.
  
  The next section defines the parameters for both
  \fI/var/log/httpd/access.log\fR and \fI/var/log/httpd/error.log\fR.

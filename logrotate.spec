@@ -7,7 +7,8 @@
 # Conditional build:
 %bcond_without	acl		# build without ACLs support
 %bcond_without	selinux		# build without SELinux support
-#
+%bcond_without	tests	# do not perform "make test"
+
 Summary:	Rotates, compresses, removes and mails system log files
 Summary(de.UTF-8):	Rotiert, komprimiert und verschickt Systemlogs
 Summary(es.UTF-8):	Hace el rutado, comprime y envía mail de logs del sistema
@@ -18,12 +19,12 @@ Summary(ru.UTF-8):	Ротирует, компрессирует, удаляет 
 Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup olarak yollar
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
-Version:	3.8.3
+Version:	3.8.6
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://fedorahosted.org/releases/l/o/logrotate/%{name}-%{version}.tar.gz
-# Source0-md5:	df67c8bda9139131d919931da443794d
+# Source0-md5:	cd0082bbd7248e627ec659f2442fcdf9
 Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-cron.patch
@@ -120,6 +121,10 @@ Logrotate призначений для полегшення адміністр�
 	WITH_ACL=%{?with_acl:yes}%{!?with_acl:no} \
 	WITH_SELINUX=%{?with_selinux:yes}%{!?with_selinux:no} \
 	STATEFILE="%{statdir}/logrotate.status"
+
+%if %{with tests}
+%{__make} test
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
