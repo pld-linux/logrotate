@@ -9,7 +9,7 @@ fi
 # NOTE: DISABLE_LOGROTATE_CRON is not official option to tune, it's only here to handle migration from < 3.8.6-1
 [ "$DISABLE_LOGROTATE_CRON" = "yes" ] && exit 0
 
-/usr/sbin/logrotate $ARG /etc/logrotate.conf
+/usr/sbin/logrotate $ARG /etc/logrotate.conf "$@"
 EXITVALUE=$?
 if [ $EXITVALUE != 0 ]; then
 	/usr/bin/logger -t logrotate "ALERT exited abnormally with [$EXITVALUE]"
