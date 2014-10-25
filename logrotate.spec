@@ -33,7 +33,7 @@ Patch1:		%{name}-man.patch
 Patch2:		tabooext.patch
 URL:		https://fedorahosted.org/logrotate/
 %{?with_acl:BuildRequires:	acl-devel}
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 %if %{with selinux}
 BuildRequires:	libselinux-devel
