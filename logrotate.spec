@@ -33,6 +33,8 @@ Patch1:		%{name}-man.patch
 Patch2:		tabooext.patch
 URL:		https://fedorahosted.org/logrotate/
 %{?with_acl:BuildRequires:	acl-devel}
+BuildRequires:	autoconf
+BuildRequires:	automake
 %if %{with selinux}
 BuildRequires:	libselinux-devel
 %{?with_tests:BuildRequires:	libselinux-utils}
@@ -118,13 +120,22 @@ Logrotate призначений для полегшення адміністр�
 %patch1 -p1
 %patch2 -p1
 
+echo '
+#undef STATEFILE
+#define STATEFILE "%{statdir}/logrotate.status"
+' >> config.h
+
 %build
-%{__make} \
-	CC="%{__cc}" \
-	RPM_OPT_FLAGS="%{rpmcflags} %{rpmcppflags}" \
-	WITH_ACL=%{?with_acl:yes}%{!?with_acl:no} \
-	WITH_SELINUX=%{?with_selinux:yes}%{!?with_selinux:no} \
-	STATEFILE="%{statdir}/logrotate.status"
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+
+%configure \
+	--disable-silent-rules \
+	--with%{!?with_acl:out}-acl \
+	--with%{!?with_selinux:out}-selinux \
+
+%{__make}
 
 %if %{with tests}
 %{__make} test
@@ -136,8 +147,7 @@ install -d $RPM_BUILD_ROOT/etc/{cron.d,logrotate.d,sysconfig} \
 	$RPM_BUILD_ROOT{%{_libexecdir},%{_mandir},%{statdir}}
 
 %{__make} install \
-	BINDIR=$RPM_BUILD_ROOT%{_sbindir} \
-	MANDIR=$RPM_BUILD_ROOT%{_mandir}
+	DESTDIR=$RPM_BUILD_ROOT
 
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
 cp -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/%{name}
