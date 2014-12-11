@@ -20,7 +20,7 @@ Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.8.8
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://fedorahosted.org/releases/l/o/logrotate/%{name}-%{version}.tar.gz
@@ -31,6 +31,7 @@ Source3:	%{name}.cron
 Source4:	%{name}.crontab
 Patch1:		%{name}-man.patch
 Patch2:		tabooext.patch
+Patch3:		%{name}-largefile.patch
 URL:		https://fedorahosted.org/logrotate/
 %{?with_acl:BuildRequires:	acl-devel}
 BuildRequires:	autoconf >= 2.50
@@ -119,6 +120,7 @@ Logrotate призначений для полегшення адміністр�
 %setup -q
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 echo '
 #undef STATEFILE
