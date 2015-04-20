@@ -20,7 +20,7 @@ Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.9.1
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://fedorahosted.org/releases/l/o/logrotate/%{name}-%{version}.tar.gz
@@ -41,6 +41,7 @@ BuildRequires:	libselinux-devel
 %{?with_tests:BuildRequires:	libselinux-utils}
 %endif
 BuildRequires:	popt-devel >= 1.3
+Requires(post):	coreutils
 Requires:	coreutils
 Requires:	crondaemon
 Requires:	filesystem >= 4.0-4
