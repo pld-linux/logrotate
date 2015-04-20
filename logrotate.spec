@@ -35,7 +35,7 @@ Patch3:		%{name}-largefile.patch
 URL:		https://fedorahosted.org/logrotate/
 %{?with_acl:BuildRequires:	acl-devel}
 BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake
+BuildRequires:	automake >= 1:1.13
 %if %{with selinux}
 BuildRequires:	libselinux-devel
 %{?with_tests:BuildRequires:	libselinux-utils}
