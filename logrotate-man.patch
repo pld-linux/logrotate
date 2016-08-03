@@ -14,7 +14,7 @@
  being removed. After the log file has been rotated (but before the old
  version of the log has been compressed), the command 
 -\fI/sbin/killall \-HUP syslogd\fR will be executed.
-+\fI/usr/bin/killall \-HUP syslogd\fR will be executed.
++\fI/bin/killall \-HUP syslogd\fR will be executed.
  
  The next section defines the parameters for both
  \fI/var/log/httpd/access.log\fR and \fI/var/log/httpd/error.log\fR.
