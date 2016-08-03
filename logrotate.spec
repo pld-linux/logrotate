@@ -19,12 +19,12 @@ Summary(ru.UTF-8):	Ротирует, компрессирует, удаляет 
 Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup olarak yollar
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
-Version:	3.9.2
+Version:	3.10.0
 Release:	1
 License:	GPL v2
 Group:		Applications/System
-Source0:	https://github.com/logrotate/logrotate/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	584bca013dcceeb23b06b27d6d0342fb
+Source0:	https://github.com/logrotate/logrotate/releases/download/%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	812705ff58ad308c82b1a6fac1031949
 Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Source3:	%{name}.cron
@@ -36,6 +36,8 @@ URL:		https://github.com/logrotate/logrotate
 %{?with_acl:BuildRequires:	acl-devel}
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.13
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 %if %{with selinux}
 BuildRequires:	libselinux-devel
 %{?with_tests:BuildRequires:	libselinux-utils}
@@ -182,7 +184,6 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES
 %attr(755,root,root) %{_sbindir}/logrotate
 %attr(755,root,root) %{_libexecdir}/logrotate
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}.conf
