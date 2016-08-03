@@ -164,7 +164,7 @@ cp -p %{SOURCE4} $RPM_BUILD_ROOT/etc/cron.d/%{name}
 rm -rf $RPM_BUILD_ROOT
 
 %triggerun -- %{name} < 3.8.6-1
-# if previous install had /etc/cron.daily/* files unlink (missingok), disable the cronjob
+# if previous install had /etc/cron.daily/* files removed (missingok), disable the cronjob
 if [ ! -e /etc/cron.daily/%{name} ]; then
 	echo DISABLE_LOGROTATE_CRON=yes >> /etc/sysconfig/%{name}
 fi
