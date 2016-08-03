@@ -36,13 +36,13 @@ URL:		https://github.com/logrotate/logrotate
 %{?with_acl:BuildRequires:	acl-devel}
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.13
-BuildRequires:	tar >= 1:1.22
-BuildRequires:	xz
 %if %{with selinux}
 BuildRequires:	libselinux-devel
 %{?with_tests:BuildRequires:	libselinux-utils}
 %endif
 BuildRequires:	popt-devel >= 1.3
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 Requires(post):	coreutils
 Requires:	coreutils
 Requires:	crondaemon
