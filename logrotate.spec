@@ -19,19 +19,18 @@ Summary(ru.UTF-8):	Ротирует, компрессирует, удаляет 
 Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup olarak yollar
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
-Version:	3.10.0
+Version:	3.11.0
 Release:	1
-License:	GPL v2
+License:	GPL v2+
 Group:		Applications/System
 Source0:	https://github.com/logrotate/logrotate/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	812705ff58ad308c82b1a6fac1031949
+# Source0-md5:	3a9280e4caeb837427a2d54518fbcdac
 Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Source3:	%{name}.cron
 Source4:	%{name}.crontab
+Patch0:		tabooext.patch
 Patch1:		%{name}-man.patch
-Patch2:		tabooext.patch
-Patch3:		%{name}-largefile.patch
 URL:		https://github.com/logrotate/logrotate
 %{?with_acl:BuildRequires:	acl-devel}
 BuildRequires:	autoconf >= 2.50
@@ -121,14 +120,8 @@ Logrotate призначений для полегшення адміністр�
 
 %prep
 %setup -q
+%patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-
-echo '
-#undef STATEFILE
-#define STATEFILE "%{statdir}/logrotate.status"
-' >> config.h
 
 %build
 %{__aclocal}
@@ -139,6 +132,7 @@ echo '
 	--disable-silent-rules \
 	--with%{!?with_acl:out}-acl \
 	--with%{!?with_selinux:out}-selinux \
+	--with-state-file-path=%{statdir}/logrotate.status
 
 %{__make}
 
@@ -184,7 +178,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES
+%doc README.md ChangeLog.md
 %attr(755,root,root) %{_sbindir}/logrotate
 %attr(755,root,root) %{_libexecdir}/logrotate
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}.conf
