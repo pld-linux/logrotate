@@ -1,0 +1,7 @@
+[Unit]
+Description=logrotate cron job
+
+[Service]
+ExecStart=/usr/lib/logrotate
+
+# vi: ft=systemd

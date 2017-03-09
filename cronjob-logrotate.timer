@@ -1,0 +1,11 @@
+[Unit]
+Description=logrotate cron job
+
+[Timer]
+OnCalendar=*-*-* 05:02:00
+Persistent=true
+
+[Install]
+WantedBy=cronjobs.target
+
+# vi: ft=systemd

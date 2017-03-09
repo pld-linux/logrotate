@@ -20,7 +20,7 @@ Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.11.0
-Release:	1
+Release:	1.1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	https://github.com/logrotate/logrotate/releases/download/%{version}/%{name}-%{version}.tar.xz
@@ -29,6 +29,8 @@ Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Source3:	%{name}.cron
 Source4:	%{name}.crontab
+Source5:	cronjob-%{name}.timer
+Source6:	cronjob-%{name}.service
 Patch0:		tabooext.patch
 Patch1:		%{name}-man.patch
 URL:		https://github.com/logrotate/logrotate
@@ -40,14 +42,16 @@ BuildRequires:	libselinux-devel
 %{?with_tests:BuildRequires:	libselinux-utils}
 %endif
 BuildRequires:	popt-devel >= 1.3
+BuildRequires:  rpmbuild(macros) >= 1.644
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post):	coreutils
 Requires:	coreutils
-Requires:	crondaemon
+Requires:	cronjobs
 Requires:	filesystem >= 4.0-4
 Requires:	gzip
 Requires:	setup >= 2.4.6
+Requires:       systemd-units >= 38
 Suggests:	/bin/mail
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -143,7 +147,8 @@ Logrotate призначений для полегшення адміністр�
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{cron.d,logrotate.d,sysconfig} \
-	$RPM_BUILD_ROOT{%{_libexecdir},%{_mandir},%{statdir}}
+	$RPM_BUILD_ROOT{%{_libexecdir},%{_mandir},%{statdir}} \
+	$RPM_BUILD_ROOT%{systemdunitdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -152,6 +157,8 @@ cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.conf
 cp -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/%{name}
 install -p %{SOURCE3} $RPM_BUILD_ROOT%{_libexecdir}/%{name}
 cp -p %{SOURCE4} $RPM_BUILD_ROOT/etc/cron.d/%{name}
+cp -p %{SOURCE5} $RPM_BUILD_ROOT%{systemdunitdir}
+cp -p %{SOURCE6} $RPM_BUILD_ROOT%{systemdunitdir}
 > $RPM_BUILD_ROOT%{statdir}/%{name}.status
 
 %clean
@@ -166,6 +173,9 @@ fi
 %triggerpostun -- %{name} < 3.7.8-4
 %{__sed} -i -e 's,olddir /var/log/archiv$,olddir /var/log/archive,' %{_sysconfdir}/%{name}.conf %{_sysconfdir}/logrotate.d/* || :
 
+%triggerpostun -- %{name} < 3.11.0-1.1
+%systemd_trigger %{name}.timer
+
 %post
 if [ -f /var/lib/logrotate.status ]; then
 	mv -f /var/lib/logrotate.status %{statdir}/logrotate.status
@@ -175,6 +185,13 @@ else
 	chown root:root %{statdir}/logrotate.status
 	chmod 640 %{statdir}/logrotate.status
 fi
+%systemd_post cronjob-logrotate.timer
+
+%preun
+%systemd_preun cronjob-logrotate.timer
+
+%postun
+%systemd_reload
 
 %files
 %defattr(644,root,root,755)
@@ -187,3 +204,5 @@ fi
 %attr(640,root,root) %ghost %{statdir}/logrotate.status
 %{_mandir}/man5/logrotate.conf.5*
 %{_mandir}/man8/logrotate.8*
+%{systemdunitdir}/cronjob-logrotate.service
+%{systemdunitdir}/cronjob-logrotate.timer
