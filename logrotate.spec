@@ -20,7 +20,7 @@ Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.11.0
-Release:	1.1
+Release:	2
 License:	GPL v2+
 Group:		Applications/System
 Source0:	https://github.com/logrotate/logrotate/releases/download/%{version}/%{name}-%{version}.tar.xz
