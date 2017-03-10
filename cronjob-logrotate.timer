@@ -1,5 +1,5 @@
 [Unit]
-Description=logrotate cron job
+Description=logrotate cron job timer
 
 [Timer]
 OnCalendar=*-*-* 05:02:00

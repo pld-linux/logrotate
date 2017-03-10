@@ -20,7 +20,7 @@ Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
 Version:	3.11.0
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Applications/System
 Source0:	https://github.com/logrotate/logrotate/releases/download/%{version}/%{name}-%{version}.tar.xz
@@ -173,8 +173,8 @@ fi
 %triggerpostun -- %{name} < 3.7.8-4
 %{__sed} -i -e 's,olddir /var/log/archiv$,olddir /var/log/archive,' %{_sysconfdir}/%{name}.conf %{_sysconfdir}/logrotate.d/* || :
 
-%triggerpostun -- %{name} < 3.11.0-1.1
-%systemd_trigger %{name}.timer
+%triggerpostun -- %{name} < 3.11.0-3
+%systemd_service_enable cronjob-%{name}.timer
 
 %post
 if [ -f /var/lib/logrotate.status ]; then
