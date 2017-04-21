@@ -1,15 +1,24 @@
---- logrotate/logrotate.8.in~	2016-12-03 16:23:33.744988966 +0200
-+++ logrotate/logrotate.8.in	2016-12-03 16:34:50.502613948 +0200
-@@ -65,7 +65,7 @@
- \fB\-s\fR, \fB\-\-state <statefile>\fR
- Tells \fBlogrotate\fR to use an alternate state file.  This is useful
- if logrotate is being run as a different user for various sets of
--log files.  The default state file is \fI/var/lib/logrotate.status\fR.
-+log files.  The default state file is \fI@STATE_FILE_PATH@\fR.
+--- logrotate-3.12.1/logrotate.8.in~	2017-04-07 18:15:37.000000000 +0300
++++ logrotate-3.12.1/logrotate.8.in	2017-04-21 19:49:54.334686948 +0300
+@@ -104,7 +104,7 @@
+     rotate 5
+     weekly
+     postrotate
+-        /usr/bin/killall \-HUP syslogd
++        /bin/killall \-HUP syslogd
+     endscript
+ }
  
- .TP
- \fB\-\-usage\fR
-@@ -125,7 +125,7 @@
+@@ -114,7 +114,7 @@
+     size 100k
+     sharedscripts
+     postrotate
+-        /usr/bin/killall \-HUP httpd
++        /bin/killall \-HUP httpd
+     endscript
+ }
+ 
+@@ -146,7 +146,7 @@
  \fI/var/log/messages\fR. The log will go through five weekly rotations before
  being removed. After the log file has been rotated (but before the old
  version of the log has been compressed), the command 
@@ -18,12 +27,3 @@
  
  The next section defines the parameters for both
  \fI/var/log/httpd/access.log\fR and \fI/var/log/httpd/error.log\fR.
-@@ -449,7 +449,7 @@
- Log files are rotated if the current weekday is less than the weekday
- of the last rotation or if more than a week has passed since the last
- rotation. This is normally the same as rotating logs on the first day
--of the week, but it works better if \fIlogrotate\fR is not run every
-+of the week, but it works better if \fBlogrotate\fR is not run every
- night.
- 
- .TP

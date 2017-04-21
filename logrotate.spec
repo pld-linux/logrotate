@@ -19,12 +19,12 @@ Summary(ru.UTF-8):	Ротирует, компрессирует, удаляет 
 Summary(tr.UTF-8):	Sistem günlüklerini yönlendirir, sıkıştırır ve mektup olarak yollar
 Summary(uk.UTF-8):	Ротує, компресує, видаляє та відправляє поштою лог-файли
 Name:		logrotate
-Version:	3.11.0
-Release:	3
+Version:	3.12.1
+Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	https://github.com/logrotate/logrotate/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	3a9280e4caeb837427a2d54518fbcdac
+# Source0-md5:	9c3d4c55220497a5530179c1c5e5b6eb
 Source1:	%{name}.conf
 Source2:	%{name}.sysconfig
 Source3:	%{name}.cron
@@ -42,7 +42,7 @@ BuildRequires:	libselinux-devel
 %{?with_tests:BuildRequires:	libselinux-utils}
 %endif
 BuildRequires:	popt-devel >= 1.3
-BuildRequires:  rpmbuild(macros) >= 1.644
+BuildRequires:	rpmbuild(macros) >= 1.644
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post):	coreutils
@@ -51,7 +51,7 @@ Requires:	cronjobs
 Requires:	filesystem >= 4.0-4
 Requires:	gzip
 Requires:	setup >= 2.4.6
-Requires:       systemd-units >= 38
+Requires:	systemd-units >= 38
 Suggests:	/bin/mail
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
