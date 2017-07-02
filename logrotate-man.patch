@@ -1,5 +1,5 @@
---- logrotate-3.12.1/logrotate.8.in~	2017-04-07 18:15:37.000000000 +0300
-+++ logrotate-3.12.1/logrotate.8.in	2017-04-21 19:49:54.334686948 +0300
+--- logrotate-3.12.3/logrotate.8.in~	2017-07-02 20:26:48.000000000 +0300
++++ logrotate-3.12.3/logrotate.8.in	2017-07-02 20:27:25.062722303 +0300
 @@ -104,7 +104,7 @@
      rotate 5
      weekly
@@ -22,7 +22,7 @@
  \fI/var/log/messages\fR. The log will go through five weekly rotations before
  being removed. After the log file has been rotated (but before the old
  version of the log has been compressed), the command 
--\fI/sbin/killall \-HUP syslogd\fR will be executed.
+-\fI/usr/bin/killall \-HUP syslogd\fR will be executed.
 +\fI/bin/killall \-HUP syslogd\fR will be executed.
  
  The next section defines the parameters for both
