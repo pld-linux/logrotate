@@ -136,6 +136,9 @@ Logrotate призначений для полегшення адміністр�
 	--disable-silent-rules \
 	--with%{!?with_acl:out}-acl \
 	--with%{!?with_selinux:out}-selinux \
+	--with-default-mail-command=/bin/mail \
+	--with-compress-command=/bin/gzip \
+	--with-uncompress-command=/bin/gunzip \
 	--with-state-file-path=%{statdir}/logrotate.status
 
 %{__make}
