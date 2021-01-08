@@ -173,10 +173,8 @@ if [ ! -e /etc/cron.daily/%{name} ]; then
 	echo DISABLE_LOGROTATE_CRON=yes >> /etc/sysconfig/%{name}
 fi
 
-%triggerpostun -- %{name} < 3.7.8-4
-%{__sed} -i -e 's,olddir /var/log/archiv$,olddir /var/log/archive,' %{_sysconfdir}/%{name}.conf %{_sysconfdir}/logrotate.d/* || :
-
 %triggerpostun -- %{name} < 3.11.0-3
+%{__sed} -i -e 's,olddir /var/log/archiv$,olddir /var/log/archive,' %{_sysconfdir}/%{name}.conf %{_sysconfdir}/logrotate.d/* || :
 %systemd_service_enable cronjob-%{name}.timer
 
 %post
