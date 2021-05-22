@@ -1,11 +1,11 @@
---- logrotate-3.15.1/logrotate.8.in~	2019-08-30 21:05:18.000000000 +0300
-+++ logrotate-3.15.1/logrotate.8.in	2019-08-30 21:06:23.354577118 +0300
+--- logrotate-3.18.1/logrotate.8.in~	2021-05-22 12:57:51.000000000 +0300
++++ logrotate-3.18.1/logrotate.8.in	2021-05-22 12:58:20.837620211 +0300
 @@ -104,7 +104,7 @@
      rotate 5
      weekly
      postrotate
 -        /usr/bin/killall \-HUP syslogd
-+        /bin/killall \-HUP syslogd
++        killall \-HUP syslogd
      endscript
  }
  
@@ -14,16 +14,16 @@
      sharedscripts
      postrotate
 -        /usr/bin/killall \-HUP httpd
-+        /bin/killall \-HUP httpd
++        killall \-HUP httpd
      endscript
  }
  
-@@ -158,7 +158,7 @@
- \fI/var/log/messages\fR. The log will go through five weekly rotations before
- being removed. After the log file has been rotated (but before the old
+@@ -178,7 +178,7 @@
+ \fI/var/log/messages\fR.  The log will go through five weekly rotations before
+ being removed.  After the log file has been rotated (but before the old
  version of the log has been compressed), the command
 -\fI/usr/bin/killall \-HUP syslogd\fR will be executed.
-+\fI/bin/killall \-HUP syslogd\fR will be executed.
++\fIkillall \-HUP syslogd\fR will be executed.
  
  The next section defines the parameters for both
  \fI/var/log/httpd/access.log\fR and \fI/var/log/httpd/error.log\fR.

@@ -1,8 +1,8 @@
---- logrotate-3.15.0/config.c~	2018-10-05 18:01:21.000000000 +0300
-+++ logrotate-3.15.0/config.c	2018-12-04 17:33:40.040702438 +0200
-@@ -134,6 +134,7 @@
- static const char *defTabooExts[] = {
+--- logrotate-3.18.1/config.c~	2021-05-21 13:28:13.000000000 +0300
++++ logrotate-3.18.1/config.c	2021-05-22 12:57:24.338025775 +0300
+@@ -127,6 +127,7 @@
      ",v",
+     ".bak",
      ".cfsaved",
 +    ".cvsignore",
      ".disabled",
